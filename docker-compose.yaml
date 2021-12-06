@@ -8,7 +8,7 @@ services:
         ports:
             - 5555:80
         volumes:
-            - ./src:/var/www/html
+            - ./app:/var/www/html
 
     db:
         image: mariadb
@@ -16,7 +16,8 @@ services:
         volumes:
             - ./database:/var/lib/mysql
         environment:
-            MYSQL_ROOT_PASSWORD: example
+            MYSQL_DATABASE: post_project_db
+            MYSQL_ROOT_PASSWORD: root
 
     phpmyadmin:
         image: phpmyadmin

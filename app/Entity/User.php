@@ -144,4 +144,3 @@ abstract class User
         return $this;
     }
 }
-

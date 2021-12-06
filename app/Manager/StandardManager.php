@@ -8,5 +8,4 @@ class StandardManager extends UserManager
 
 {
 
-
 }

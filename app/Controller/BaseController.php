@@ -4,8 +4,8 @@ namespace App\Controller;
 
 abstract class BaseController
 {
-    private $templateFile = __DIR__ . './../Views/template.php';//A definir
-    private $viewsDir = __DIR__ . './../Views/Frontend/';//A definir
+    private $templateFile = __DIR__ . './../Views/template.php';
+    private $viewsDir = __DIR__ . './../Views/Frontend/';
     protected $params;
 
     public function __construct(string $action, array $params = [])

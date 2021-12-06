@@ -9,4 +9,3 @@ class Admin extends User
 }
 
 }
-

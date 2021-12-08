@@ -7,9 +7,4 @@
  */
 
 
-foreach ($posts as &$post) {
-    print($post->getTitle());
-    print($post->getContent());
-}
-
 ?>

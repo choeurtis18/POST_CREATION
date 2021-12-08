@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <routes>
+    <!--FrontEnd -->
     <route path="/" action="home" controller="FrontController"/>
+    <route path="/" action="login" controller="FrontController"/>
+
+    <!--Security-->
+    <route path="login" action="login" controller="SecurityController"/>
+    <route path="register" action="login" controller="SecurityController"/>
+    <route path="login" action="signup" controller="SecurityController"/>
+
+
 </routes>

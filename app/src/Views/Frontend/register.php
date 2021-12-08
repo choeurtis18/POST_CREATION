@@ -444,35 +444,36 @@
     }
 </style>
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
 
-$('.card__info').each(function (f) {
+        $('.card__info').each(function (f) {
 
-var newstr = $(this).text().substring(0,200);
-$(this).text(newstr);
+            var newstr = $(this).text().substring(0,200);
+            $(this).text(newstr);
 
-});
-})
+        });
+    })
 </script>
-<div class="container">
-    <div class="card__container">
-        <?php
 
-        foreach($posts as $post) {
-        ?>
-        <div class="card">
-            <div class="card__content">
-                <h3 class="card__header"><?php echo $post->getTitle(); ?></h3>
-                <p class="card__info" maxlength="20" ><?php echo $post->getContent(); ?></p>
-                <button class="card__button" maxlength="20" >Read now</button>
-            </div>
+
+<div class="form-structor">
+    <div class="signup">
+        <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
+        <div class="form-holder">
+            <input type="text" class="input" placeholder="Name" />
+            <input type="email" class="input" placeholder="Email" />
+            <input type="password" class="input" placeholder="Password" />
         </div>
-            <?php
-
-        }
-        ?>
-
+        <button class="submit-btn">S'inscrire</button>
+    </div>
+    <div class="login slide-up">
+        <div class="center">
+            <h2 class="form-title" id="login"><span>or</span>Log in</h2>
+            <div class="form-holder">
+                <input type="email" class="input" placeholder="Email" />
+                <input type="password" class="input" placeholder="Password" />
+            </div>
+            <button class="submit-btn">Log in</button>
+        </div>
     </div>
 </div>
-
-

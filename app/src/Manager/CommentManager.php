@@ -9,7 +9,7 @@ class CommentManager extends BaseManager
 
     public function getAllComments(int $number=null): array
     {
-        $query=$this->db->prepare('Select * FROM comment ');
+        $query=$this->db->prepare('Select * FROM comment');
         $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,'Entity\comment');
 
         return $query->fetchAll();

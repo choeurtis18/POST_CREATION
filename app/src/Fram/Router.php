@@ -13,7 +13,6 @@ class Router
         $routes = $xml->getElementsByTagName('route');
         
         isset($_GET['p']) ? $path = strtolower(htmlspecialchars($_GET['p'])) : $path = '/';
-
         foreach ($routes as $route) {
             if ($path === $route->getAttribute('path')) {
                 $controllerClass = 'App\\Controller\\' . $route->getAttribute('controller');

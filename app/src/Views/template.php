@@ -15,9 +15,9 @@
 
     <title><?= $title; ?></title>
 </head>
-<body>
+<body style="margin: 50px 100px 50px 100px">
     <nav>
-        <a href="#">Acceuil</a>
+        <a href="/">Acceuil</a>
         <!-- <a href="#">CODING</a> -->
         <a href="#">Connexion</a>
         <div id="indicator"></div>

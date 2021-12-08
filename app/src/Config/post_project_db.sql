@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mer. 08 déc. 2021 à 08:56
+-- Généré le : mer. 08 déc. 2021 à 21:50
 -- Version du serveur : 10.6.4-MariaDB-1:10.6.4+maria~focal
 -- Version de PHP : 7.4.25
 
@@ -29,9 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL,
-  `publishedDate` date NOT NULL,
+  `publishedDate` varchar(50) NOT NULL,
   `content` varchar(500) NOT NULL,
-  `authorId` int(11) NOT NULL
+  `authorId` int(11) NOT NULL,
+  `postId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -43,7 +44,7 @@ CREATE TABLE `comment` (
 CREATE TABLE `post` (
   `id` int(11) NOT NULL,
   `publishedDate` date NOT NULL,
-  `title` varchar(50) NOT NULL,
+  `title` varchar(50) CHARACTER SET utf8mb3 NOT NULL,
   `content` varchar(2200) NOT NULL,
   `authorId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53,7 +54,9 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `publishedDate`, `title`, `content`, `authorId`) VALUES
-(1, '2021-12-08', 'Test', 'okey okey et puis merde ALORS', 1);
+(4, '2021-12-01', 'Test', 'azertyuiop', 1),
+(5, '2021-12-07', 'azeer', 'asdfdgfbcxdd', 1),
+(6, '2021-12-01', 'gfd', 'qsdfbv zwé azra', 1);
 
 -- --------------------------------------------------------
 
@@ -108,13 +111,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `user`

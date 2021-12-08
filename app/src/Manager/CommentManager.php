@@ -24,6 +24,23 @@ class CommentManager extends BaseManager
         } 
     }
 
+    public function getAllCommentsByPostId(int $id): array
+    {
+        try {
+            $query = $this->db->prepare('SELECT * FROM `comment` WHERE postId=:id');
+            $query->bindValue(':id', $id, \PDO::PARAM_INT);
+            $query->execute();
+    
+            while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+                $comment = new Comment($row);
+                $comments[] = $comment;
+            };
+            return $comments;
+        } catch (\Exception $e) {
+            die('Erreur : '.$e->getMessage());
+            return "error getAllComments function in CommentManager.php";
+        } 
+    }
     /**
      * @param int $id
      * @return Comment

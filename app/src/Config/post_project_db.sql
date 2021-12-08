@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 06 déc. 2021 à 10:29
+-- Généré le : mer. 08 déc. 2021 à 08:56
 -- Version du serveur : 10.6.4-MariaDB-1:10.6.4+maria~focal
 -- Version de PHP : 7.4.25
 
@@ -47,6 +47,13 @@ CREATE TABLE `post` (
   `content` varchar(2200) NOT NULL,
   `authorId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `post`
+--
+
+INSERT INTO `post` (`id`, `publishedDate`, `title`, `content`, `authorId`) VALUES
+(1, '2021-12-08', 'Test', 'okey okey et puis merde ALORS', 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +114,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `user`

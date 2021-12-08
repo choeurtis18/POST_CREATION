@@ -3,7 +3,6 @@
 namespace App\Manager;
 
 use App\Entity\Post;
-use PDO;
 
 class PostManager extends BaseManager
 {
@@ -15,19 +14,15 @@ class PostManager extends BaseManager
      */
     public function getAllPosts(): array
     {
-        try {
-            $query = $this->db->prepare('SELECT * FROM `post`');
-            $query->execute();
-    
-            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                $post = new Post($row);
-                $posts[] = $post;
-            };
-            return $posts;
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error getAllPosts function in PostManager.php";
-        } 
+        
+        $query = $this->db->prepare('SELECT * FROM `post`');
+        $query->execute();
+
+        while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+            $post = new Post($row);
+            $posts[] = $post;
+        };
+        return $posts;
     }
 
     /**
@@ -36,18 +31,11 @@ class PostManager extends BaseManager
      */
     public function getPostById(int $id): Post
     {
-        try {
-            $req = $this->db->prepare('SELECT * FROM post WHERE id=:id');
-            $req->bindValue(':id', $id, PDO::PARAM_INT);
-
-            $req->execute();
-            $row = $req->fetch(PDO::FETCH_ASSOC);
-            $post = new Post($row);
-            return $post;
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error getPostById function in PostManager.php";
-        } 
+        $query = $this->db->prepare('SELECT * FROM post WHERE id=:id');
+        $query->bindValue(':id', $id, \PDO::PARAM_INT);
+        $query->execute();
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,'Entity\post');
+        return $query->fetch();
     }
 
 
@@ -57,42 +45,29 @@ class PostManager extends BaseManager
      */
     public function createPost(Post $post)
     {
-        try {
-            $query = $this->db->prepare("INSERT INTO `post` (`id`, `publishedDate`, `title`, `content`, `authorId`) VALUES (NULL, :publishedDate ,:title, :content ,:authorId)");
-            $query ->bindValue(':title' , $post->getTitle(), PDO::PARAM_STR);
-            $query ->bindValue(':content' , $post->getContent(), PDO::PARAM_STR);
-            $query ->bindValue(':publishedDate',$post->getPublishedDate()->format('Y-m-d'), PDO::PARAM_STR);
-            $query ->bindValue(':authorId',$post->getAuthorId(), PDO::PARAM_INT);
-            $query->execute();
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error createPost function in PostManager.php";
-        }  
+
+        $query = $this->db->prepare("INSERT INTO post (title,content, date, authorId,) VALUES (:title,:content ,:date ,:authorId)");
+        $query ->bindValue(':title' , $post->getTitle());
+        $query ->bindValue(':content' , $post->getContent());
+        $query ->bindValue(':date',$post->getPublishedDate());
+        $query ->bindValue(':authorId',$post->getAuthorId());
+        $query->execute();
+
     }
 
     /**
      * @param Post $post
      * @return Post|bool A revoir
      */
-    public function updatePost(Post $post)
+    public function updatePost(int $id)
     {
-        try {
-            $query = $this->db->prepare("UPDATE `post`  SET `title` = :title,
-                                                        `content` = :content,
-                                                        `publishedDate` = :publishedDate,
-                                                        `authorId` = :authorId
-                                                    WHERE `id` = :id");
-        
-            $query->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
-            $query->bindValue(':publishedDate', $post->getPublishedDate()->format('Y-m-d'), PDO::PARAM_STR);
-            $query->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
-            $query->bindValue(':authorId', $post->getAuthorId(), PDO::PARAM_INT);
-            $query->bindValue(':id', $post->getId(), PDO::PARAM_INT);
-            $query->execute();
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error deletePostById function in PostManager.php";
-        }
+        $query = $this->db->prepare("UPDATE post SET publishedDate = :publishedDate,
+                                                      title = :title,
+                                                      content = :content,
+                                                      authorId= :authorId
+                                                    WHERE id=:id");
+
+        $query->execute();
     }
 
     /**
@@ -101,14 +76,9 @@ class PostManager extends BaseManager
      */
     public function deletePostById(int $id)
     {
-        try {
-            $req = $this->db->prepare('DELETE FROM post WHERE id=:ID');
-            $req->bindValue(':ID', $id, PDO::PARAM_INT);
+        $query = $this->db->prepare('DELETE FROM post WHERE id=:id');
+        $query->bindValue(':id', $id, \PDO::PARAM_INT);
+        $query->execute();
 
-            $req->execute();
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error deletePostById function in PostManager.php";
-        }  
     }
 }

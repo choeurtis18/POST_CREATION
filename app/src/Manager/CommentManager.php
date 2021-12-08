@@ -9,19 +9,10 @@ class CommentManager extends BaseManager
 
     public function getAllComments(int $number=null): array
     {
-        try {
-            $query = $this->db->prepare('SELECT * FROM `comment`');
-            $query->execute();
-    
-            while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
-                $comment = new Comment($row);
-                $comments[] = $comment;
-            };
-            return $comments;
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error getAllComments function in CommentManager.php";
-        } 
+        $query=$this->db->prepare('Select * FROM comment ');
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,'Entity\comment');
+
+        return $query->fetchAll();
     }
 
     /**
@@ -30,76 +21,29 @@ class CommentManager extends BaseManager
      */
     public function getCommentById(int $id): Comment
     {
-        try {
-            $req = $this->db->prepare('SELECT * FROM comment WHERE id=:id');
-            $req->bindValue(':id', $id, \PDO::PARAM_INT);
+        $query = $this->db->prepare('SELECT * FROM comment WHERE id=:id');
+        $query->bindValue(':id', $id, \PDO::PARAM_INT);
+        $query->execute();
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,'Entity\comment');
 
-            $req->execute();
-            $row = $req->fetch(\PDO::FETCH_ASSOC);
-            $comment = new Comment($row);
-            return $comment;
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error getCommentById function in CommentManager.php";
-        }
+        $com = new Comment($query->fetch());
+        return $com;
     }
 
     /**
-     * @param Comment $comment
+     * @param Comment $post
      * @return Comment|bool
      */
-    public function createComment(Comment $comment) {
-        try {
-            $query = $this->db->prepare("INSERT INTO `comment` (`id`, `publishedDate`, `content`, `authorId`) VALUES (NULL, :publishedDate ,:content ,:authorId)");
-            $query ->bindValue(':content' , $comment->getContent(), \PDO::PARAM_STR);
-            $query ->bindValue(':publishedDate',$comment->getPublishedDate()->format('Y-m-d'), \PDO::PARAM_STR);
-            $query ->bindValue(':authorId',$comment->getAuthorId(), \PDO::PARAM_INT);
-            $query->execute();
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error createComm function in CommentManager.php";
-        } 
+    public function createComm(Comment $comment) {
+        $query = $this->db->prepare("INSERT INTO comment (title,content, date, authorId,) VALUES (:title,:content ,:date ,:authorId)");
+        $query ->bindValue(':content' , $comment->getContent());
+        $query ->bindValue(':date',$comment->getPublishedDate());
+        $query ->bindValue(':authorId',$comment->getAuthorId());
+        $query->execute();
+
     }
 
-/**
-     * @param Comment $Comment
-     * @return Comment|bool A revoir
-     */
-    public function updateComment(Comment $comment)
-    {
-        try {
-            $query = $this->db->prepare("UPDATE `Comment`  SET `content` = :content,
-                                                        `publishedDate` = :publishedDate,
-                                                        `authorId` = :authorId
-                                                    WHERE `id` = :id");
-        
-            $query->bindValue(':publishedDate', $comment->getPublishedDate()->format('Y-m-d'), \PDO::PARAM_STR);
-            $query->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
-            $query->bindValue(':authorId', $comment->getAuthorId(), \PDO::PARAM_INT);
-            $query->bindValue(':id', $comment->getId(), \PDO::PARAM_INT);
-            $query->execute();
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error deleteCommentById function in CommentManager.php";
-        }
-    }
 
-    /**
-     * @param int $id
-     * @return bool
-     */
-    public function deleteCommentById(int $id)
-    {
-        try {
-            $req = $this->db->prepare('DELETE FROM Comment WHERE id=:ID');
-            $req->bindValue(':ID', $id, \PDO::PARAM_INT);
-
-            $req->execute();
-        } catch (\Exception $e) {
-            die('Erreur : '.$e->getMessage());
-            return "error deleteCommentById function in CommentManager.php";
-        }  
-    }
 
 
 

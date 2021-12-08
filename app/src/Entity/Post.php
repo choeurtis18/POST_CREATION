@@ -53,7 +53,7 @@ class Post
      */
     public function setPublishedDate(string $publishedDatee): void
     {
-        $this->publishedDate = \DateTime::createFromFormat('Y-m-d', $publishedDatee);
+        $this->publishedDate = new \DateTime($publishedDatee);
     }
 
     /**

@@ -3,41 +3,28 @@
 namespace App\Controller;
 
 use App\Entity\Author;
+use App\Entity\Comment;
+use App\Entity\Post;
 use App\Fram\Factories\PDOFactory;
 use App\Fram\Utils\Flash;
 use App\Manager\PostManager;
-use App\Manager\UserManager;
-use App\Manager\AdminManager;
+use App\Manager\CommentManager;
 
 class FrontController extends BaseController
 {
     public function executeHome()
     {
         Flash::setFlash('alert', 'je suis une alerte');
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $userManager = new UserManager(PDOFactory::getMysqlConnection());
-        $adminManager = new AdminManager(PDOFactory::getMysqlConnection());
-        $posts = $postManager->getAllPosts();
+        $commentManager = new CommentManager(PDOFactory::getMysqlConnection());
 
-        $users = $userManager->getUsers();
-        $getUser1 = $userManager->getUserById(1);
-        $addUser1 = $userManager->addUser("john", "Doe", "john.doe@mail.fr", "lol123", 1);
-        $addUser2 = $userManager->addUser("julia", "Doe", "john.doe@mail.fr", "lol123", 0);
-        $updateUser1 = $userManager->updateUser(3, 'isAdmin', 1);
-        $user1Posts = $userManager->getUserPosts(1);
-        $deleteUser1 = $adminManager->DeleteUser(3);
+        $com = new Comment(["id"=>1, "publishedDate"=>"2021-12-08", "content"=>"s", "authorId"=>1]);
+        $commentManager->updateComment($com);
+        $com = $commentManager->deleteCommentById(1);
 
         $this->render(
             'home.php',
             [
-                'posts' => $posts,
-
-                'users' => $users,
-                'getUser1' => $getUser1,
-                'addUser1' => $addUser1,
-                'addUser2' => $addUser2,
-                'user1Posts' => $user1Posts,
-                'deleteUser1' => $deleteUser1
+                'com' => $com,
             ],
             'Home Page'
         );

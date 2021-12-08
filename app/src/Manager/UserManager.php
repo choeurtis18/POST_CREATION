@@ -4,8 +4,10 @@ namespace App\Manager;
 
 use App\Entity\Admin;
 use App\Entity\Standard;
+use App\Entity\Post;
+use App\Entity\Comment;
 
-abstract class UserManager extends BaseManager
+class UserManager extends BaseManager
 {
   private $bdd;
 
@@ -18,6 +20,11 @@ abstract class UserManager extends BaseManager
     return $this;
   }
 
+  /**
+   * Permet d'afficher la liste des Users
+   *
+   * @return array
+   */
   public function getUsers() {
     $db = $this->db;
     $query = "SELECT * FROM `user`";
@@ -36,6 +43,12 @@ abstract class UserManager extends BaseManager
     return $users;
   }
 
+  /**
+   * Permet de séléctionner un user grâce à son id
+   *
+   * @param int id
+   * @return string
+   */
   public function getUserById($id) {
     $db = $this->db;
     $query = "SELECT * FROM `user` WHERE id = :id";
@@ -54,13 +67,23 @@ abstract class UserManager extends BaseManager
     return $user;
   }
 
+  /**
+   * permet d'ajouter un user
+   *
+   * @param string $name
+   * @param string $lastName
+   * @param string $mail
+   * @param string $password
+   * @param boolean $isAdmin
+   * @return string
+   */
   public function addUser(string $name, string $lastName, string $mail, string $password, bool $isAdmin) {
     $db = $this->db;
     
     $query = "INSERT INTO `user` (`id`, `name`, `lastName`, `mail`, `password`, `isAdmin`) VALUES (NULL, :namee, :lastName, :mail, :passwrd, :isAdmin)";
     $req = $db->prepare($query);
 
-    if($this->checkName($name) && $this->checkEmail($mail) && $this->checkPassword($password)) {
+    if(!$this->checkEmail($mail)) {
       $req->bindValue(':namee', $name);
       $req->bindValue(':lastName', $lastName);
       $req->bindValue(':mail', $mail);
@@ -69,24 +92,38 @@ abstract class UserManager extends BaseManager
     
 
       $req->execute();
-      return "Bienvenue dans votre espace personnel " . $name . $lastName;
+      return "Bienvenue dans votre espace personnel " . $name . " " . $lastName;
 
     }
     else {
-      
+      return "Un compte a déjà été créé avec cet email. Merci d'en utiliser un autre.";
     }
   }
 
+  /**
+   * permet de modifier l'attribut d'un user selon son id
+   *
+   * @param int $ID
+   * @param string $attr
+   * @param string/int $value
+   * @return void
+   */
   public function updateUser($ID, $attr, $value) {
-    $p = $this->getUserById($ID);
     $db = $this->db;
 
-    $query = "UPDATE `user` SET $attr = $value WHERE `user`.`id` = $ID";
+    $query = "UPDATE `user` SET $attr = $value WHERE `user`.`id` = :ID";
     $req = $db->prepare($query);
+    $req->bindValue(':ID', $ID, \PDO::PARAM_INT);
+
     $req->execute();
   }
 
-
+  /**
+   * permet de récupérer tous les posts d'un user selon son id
+   *
+   * @param int $id
+   * @return array
+   */
   public function getUserPosts($id) {
     $db = $this->db;
     $query = "SELECT * FROM `post` WHERE `authorid`= :id";
@@ -96,12 +133,18 @@ abstract class UserManager extends BaseManager
     $req->execute();
 
     while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
-      $posts[] = $row;
+      $posts[] = new Post($row);
     }
 
     return $posts;
   }
 
+  /**
+   * permet de récupérer tous les commentaires d'un user selon son id
+   *
+   * @param int $id
+   * @return array
+   */
   public function getUserComments($id) {
     $db = $this->db;
     $query = "SELECT * FROM `comment` WHERE `authorid`= :id";
@@ -111,34 +154,18 @@ abstract class UserManager extends BaseManager
     $req->execute();
 
     while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
-      $comments[] = $row;
+      $comments[] = new Comment($row);
     }
 
     return $comments;
   }
-
-  public function getUserPostById($userId, $postId) {
-    $db = $this->db;
-    $query = "SELECT * FROM `post` WHERE `authorid`= :userid AND ìd`= :postid";
-
-    $req = $db->prepare($query);
-    $req->bindValue(':userid', $userId, \PDO::PARAM_INT);
-    $req->bindValue(':postid', $postId, \PDO::PARAM_INT);
-    $req->execute();
-
-    $row = $req->fetch(\PDO::FETCH_ASSOC);
-
-    return $row;
-  }
-
-
-  public function checkName(string $name) {
-    $db = $this->db;
-    $query="SELECT * FROM user WHERE `name` = :namee";
-
-    
-  }
-
+ 
+  /**
+   * permet de vérifier que le mail n'a pas été utiliser par un autre user
+   *
+   * @param string $mail
+   * @return bool
+   */
   public function checkEmail($mail) {
     $db = $this->db;
     $query="SELECT * FROM user WHERE mail = :mail ";
@@ -154,16 +181,10 @@ abstract class UserManager extends BaseManager
     catch (\PDOException $e) {
         echo utf8_encode("Echec de select email Ajout : " . $e->getMessage() . "\n");
     }		
-
     
     if(count($resultat) == 0) return false;
     else return true;
   }
-
-  public function checkPassword() {
-
-  }
-
 
 }
 ?>

@@ -6,6 +6,8 @@ use App\Entity\Admin;
 use App\Entity\Standard;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Entity\User;
+use PDO;
 
 class UserManager extends BaseManager
 {
@@ -79,7 +81,7 @@ class UserManager extends BaseManager
   {
     try {
       $query = $this->db->prepare("INSERT INTO `user` (`id`, `name`, `lastName`, `mail`, `password`, `isAdmin`) VALUES (NULL, :namee, :lastName, :mail, :passwrd, :isAdmin)");
-      if(!$this->checkEmail($mail)) {
+      if(!$this->checkEmail($user->getMail())) {
         $query->bindValue(':namee' , $user->getName(), PDO::PARAM_STR);
         $query->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);
         $query->bindValue(':mail', $user->getMail(), PDO::PARAM_STR);

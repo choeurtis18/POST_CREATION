@@ -50,14 +50,15 @@ class CommentManager extends BaseManager
      */
     public function createComment(Comment $comment) {
         try {
-            $query = $this->db->prepare("INSERT INTO `comment` (`id`, `publishedDate`, `content`, `authorId`) VALUES (NULL, :publishedDate ,:content ,:authorId)");
+            $query = $this->db->prepare("INSERT INTO `comment` (`id`, `publishedDate`, `content`, `authorId`, `postId`) VALUES (NULL, :publishedDate ,:content ,:authorId, :postId)");
             $query ->bindValue(':content' , $comment->getContent(), \PDO::PARAM_STR);
             $query ->bindValue(':publishedDate',$comment->getPublishedDate()->format('Y-m-d'), \PDO::PARAM_STR);
             $query ->bindValue(':authorId',$comment->getAuthorId(), \PDO::PARAM_INT);
+            $query ->bindValue(':postId',$comment->getPostId(), \PDO::PARAM_INT);
             $query->execute();
         } catch (\Exception $e) {
             die('Erreur : '.$e->getMessage());
-            return "error createComm function in CommentManager.php";
+            return "error createComment function in CommentManager.php";
         } 
     }
 
@@ -70,12 +71,13 @@ class CommentManager extends BaseManager
         try {
             $query = $this->db->prepare("UPDATE `Comment`  SET `content` = :content,
                                                         `publishedDate` = :publishedDate,
-                                                        `authorId` = :authorId
+                                                        `authorId` = :authorId, `postId` = :postId
                                                     WHERE `id` = :id");
         
             $query->bindValue(':publishedDate', $comment->getPublishedDate()->format('Y-m-d'), \PDO::PARAM_STR);
             $query->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
             $query->bindValue(':authorId', $comment->getAuthorId(), \PDO::PARAM_INT);
+            $query ->bindValue(':postId',$comment->getPostId(), \PDO::PARAM_INT);
             $query->bindValue(':id', $comment->getId(), \PDO::PARAM_INT);
             $query->execute();
         } catch (\Exception $e) {

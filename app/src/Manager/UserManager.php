@@ -29,7 +29,7 @@ class UserManager extends BaseManager
       $query = $this->db->prepare('SELECT * FROM `user`');
       $query->execute();
 
-      while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
+      while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
         if($row['isAdmin'] == 1){
             $user = new Admin($row);
         }elseif($row['isAdmin'] == 0){
@@ -52,11 +52,11 @@ class UserManager extends BaseManager
   public function getUserById($id) : User
   {
     try {
-      $req = $this->db->prepare('SELECT * FROM `user` WHERE id = :id');
-      $req->bindValue(':id', $id, \PDO::PARAM_INT);
+      $query = $this->db->prepare('SELECT * FROM `user` WHERE id = :id');
+      $query->bindValue(':id', $id, \PDO::PARAM_INT);
 
-      $req->execute();
-      $row = $req->fetch(\PDO::FETCH_ASSOC);
+      $query->execute();
+      $row = $query->fetch(\PDO::FETCH_ASSOC);
       if($row['isAdmin'] == 1){
         $user = new Admin($row);
       }
@@ -72,121 +72,116 @@ class UserManager extends BaseManager
   }
 
   /**
-   * @param string $name
-   * @param string $lastName
-   * @param string $mail
-   * @param string $password
-   * @param boolean $isAdmin
-   * @return string
-   */
-  public function addUser(string $name, string $lastName, string $mail, string $password, bool $isAdmin) 
+     * @param User $user
+     * @return User|bool
+     */
+  public function createUser(User $user) 
   {
-    $db = $this->db;
-    
-    $query = "INSERT INTO `user` (`id`, `name`, `lastName`, `mail`, `password`, `isAdmin`) VALUES (NULL, :namee, :lastName, :mail, :passwrd, :isAdmin)";
-    $req = $db->prepare($query);
-
-    if(!$this->checkEmail($mail)) {
-      $req->bindValue(':namee', $name);
-      $req->bindValue(':lastName', $lastName);
-      $req->bindValue(':mail', $mail);
-      $req->bindValue(':passwrd', $password);
-      $req->bindValue(':isAdmin', $isAdmin);
-    
-
-      $req->execute();
-      return "Bienvenue dans votre espace personnel " . $name . " " . $lastName;
-
+    try {
+      $query = $this->db->prepare("INSERT INTO `user` (`id`, `name`, `lastName`, `mail`, `password`, `isAdmin`) VALUES (NULL, :namee, :lastName, :mail, :passwrd, :isAdmin)");
+      if(!$this->checkEmail($mail)) {
+        $query->bindValue(':namee' , $user->getName(), PDO::PARAM_STR);
+        $query->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);
+        $query->bindValue(':mail', $user->getMail(), PDO::PARAM_STR);
+        $query->bindValue(':passwrd', $user->getPassword(), PDO::PARAM_STR);
+        $query->bindValue(':isAdmin', $user->getIsAdmin(), PDO::PARAM_INT);
+        $query->execute();
+      }
     }
-    else {
-      return "Un compte a déjà été créé avec cet email. Merci d'en utiliser un autre.";
-    }
+    catch (\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "error createUser function in UserManager.php";
+    }  
   }
 
   /**
-   * permet de modifier l'attribut d'un user selon son id
-   *
-   * @param int $ID
-   * @param string $attr
-   * @param string/int $value
-   * @return void
-   */
-  public function updateUser($ID, $attr, $value) {
-    $db = $this->db;
+     * @param User $user
+     * @return User|bool
+     */
+  public function updateUser(User $user) 
+  {
+    try {
+      $query = $this->db->prepare("UPDATE `user` SET `name` = :namee , `lastName` = :lastName , `mail` = :mail , `password` = :passwrd , `isAdmin` = :isAdmin WHERE `id` = :id");
+      $query->bindValue(':namee' , $user->getName(), PDO::PARAM_STR);
+      $query->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);
+      $query->bindValue(':mail', $user->getMail(), PDO::PARAM_STR);
+      $query->bindValue(':passwrd', $user->getPassword(), PDO::PARAM_STR);
+      $query->bindValue(':isAdmin', $user->getIsAdmin(), PDO::PARAM_INT);
+      $query->bindValue(':id', $user->getId(), PDO::PARAM_INT);
+      $query->execute();
+    }
+    catch (\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "error updateUser function in UserManager.php";
+    }
 
-    $query = "UPDATE `user` SET $attr = $value WHERE `user`.`id` = :ID";
-    $req = $db->prepare($query);
-    $req->bindValue(':ID', $ID, \PDO::PARAM_INT);
-
-    $req->execute();
   }
 
   /**
-   * permet de récupérer tous les posts d'un user selon son id
-   *
    * @param int $id
    * @return array
    */
-  public function getUserPosts($id) {
-    $db = $this->db;
-    $query = "SELECT * FROM `post` WHERE `authorid`= :id";
-
-    $req = $db->prepare($query);
-    $req->bindValue(':id', $id, \PDO::PARAM_INT);
-    $req->execute();
-
-    while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
-      $posts[] = new Post($row);
+  public function getUserPosts($id) :array
+  {
+    try {
+      $query = $this->db->prepare("SELECT * FROM `post` WHERE `authorid`= :id");
+      $query->bindValue(':id', $id, \PDO::PARAM_INT);
+      $query->execute();
+      while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+        $posts[] = new Post($row);
+      }
+      return $posts;
+    }
+    catch(\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "error getUserPosts function in UserManager.php";
     }
 
-    return $posts;
   }
 
   /**
-   * permet de récupérer tous les commentaires d'un user selon son id
-   *
    * @param int $id
    * @return array
    */
-  public function getUserComments($id) {
-    $db = $this->db;
-    $query = "SELECT * FROM `comment` WHERE `authorid`= :id";
-
-    $req = $db->prepare($query);
-    $req->bindValue(':id', $id, \PDO::PARAM_INT);
-    $req->execute();
-
-    while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
-      $comments[] = new Comment($row);
+  public function getUserComments($id) :array
+  {
+    try {
+      $query = $this->db->prepare("SELECT * FROM `comment` WHERE `authorid`= :id");
+      $query->bindValue(':id', $id, \PDO::PARAM_INT);
+      $query->execute();
+      while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+        $comments[] = new Comment($row);
+      }
+      return $comments;
     }
-
-    return $comments;
+    catch(\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "error getUserComments function in UserManager.php";
+    }
   }
  
   /**
-   * permet de vérifier que le mail n'a pas été utiliser par un autre user
-   *
    * @param string $mail
    * @return bool
    */
-  public function checkEmail($mail) {
-    $db = $this->db;
-    $query="SELECT * FROM user WHERE mail = :mail ";
-    
+  public function checkEmail($mail) 
+  {
     try {
-        $req = $db->prepare($query);
-        $req->bindValue(':mail', $mail);
-        $bool = $req->execute();
-        if ($bool) {
-            $resultat = $req->fetchAll(\PDO::FETCH_ASSOC);
-        }
+      $query = $this->db->prepare("SELECT * FROM user WHERE mail = :mail");
+      $query->bindValue(':mail', $mail);
+      $bool = $query->execute();
+      if ($bool) {
+        $resultat = $query->fetchAll(\PDO::FETCH_ASSOC);
+      }
+      if(count($resultat) == 0) return false;
+      else return true;
     }
     catch (\PDOException $e) {
-        echo utf8_encode("Echec de select email Ajout : " . $e->getMessage() . "\n");
+      die('Erreur : '.$e->getMessage());
+      return "error checkEmail function in UserManager.php";
     }		
     
-    if(count($resultat) == 0) return false;
-    else return true;
+    
   }
 
 }

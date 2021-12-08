@@ -90,7 +90,7 @@ class PostManager extends BaseManager
             $query->execute();
         } catch (\Exception $e) {
             die('Erreur : '.$e->getMessage());
-            return "error deletePostById function in PostManager.php";
+            return "error updatePost function in PostManager.php";
         }
     }
 
@@ -101,8 +101,8 @@ class PostManager extends BaseManager
     public function deletePostById(int $id)
     {
         try {
-            $req = $this->db->prepare('DELETE FROM post WHERE id=:ID');
-            $req->bindValue(':ID', $id, PDO::PARAM_INT);
+            $req = $this->db->prepare('DELETE FROM post WHERE id=:id');
+            $req->bindValue(':id', $id, PDO::PARAM_INT);
 
             $req->execute();
         } catch (\Exception $e) {

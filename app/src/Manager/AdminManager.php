@@ -7,14 +7,21 @@ use App\Entity;
 class AdminManager extends UserManager
 
 {
-  public function DeleteUser($ID) {
-    $db = $this->db;
-    $query = "DELETE FROM user WHERE id = :ID";
-
-    $req = $db->prepare($query);
-    $req->bindValue(':ID', $ID, \PDO::PARAM_INT);  
-
-    $req->execute();
+  /**
+    * @param int $id
+    * @return bool
+  */
+  public function DeleteUserById(int $id) 
+  {
+    try {
+      $query = $this->db->prepare("DELETE FROM user WHERE id = :ID");
+      $query->bindValue(':ID', $ID, \PDO::PARAM_INT);  
+      $query->execute();
+    }
+    catch (\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "error deleteUserById function in AdminManager.php";
+    }  
   }
-
+  
 }

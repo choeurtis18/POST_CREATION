@@ -8,6 +8,7 @@ class Comment
     private \DateTime $publishedDate;
     private string $content;
     private int $authorId;
+    private int $postId;
 
     function __construct($data){
         $this->hydrate($data);
@@ -88,5 +89,23 @@ class Comment
     }
 
 
+    /**
+     * Get the value of postId
+     */ 
+    public function getPostId()
+    {
+        return $this->postId;
+    }
 
+    /**
+     * Set the value of postId
+     *
+     * @return  self
+     */ 
+    public function setPostId($postId)
+    {
+        $this->postId = $postId;
+
+        return $this;
+    }
 }

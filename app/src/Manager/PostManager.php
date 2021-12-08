@@ -10,7 +10,6 @@ class PostManager extends BaseManager
 
 
     /**
-     * @param int|null $number
      * @return array
      */
     public function getAllPosts(): array

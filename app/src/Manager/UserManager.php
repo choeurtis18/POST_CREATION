@@ -21,55 +21,57 @@ class UserManager extends BaseManager
   }
 
   /**
-   * Permet d'afficher la liste des Users
-   *
    * @return array
    */
-  public function getUsers() {
-    $db = $this->db;
-    $query = "SELECT * FROM `user`";
+  public function getAllUsers() :array
+  {
+    try {
+      $query = $this->db->prepare('SELECT * FROM `user`');
+      $query->execute();
 
-    $req = $db->prepare($query);
-    $req->execute();
-    
-    while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
+      while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
         if($row['isAdmin'] == 1){
             $user = new Admin($row);
         }elseif($row['isAdmin'] == 0){
             $user = new Standard($row);
         }
         $users[] = $user;
-    };
-    return $users;
+      };
+      return $users;
+    }
+    catch (\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "error getAllUsers function in UserManager.php";
+    } 
   }
 
   /**
-   * Permet de séléctionner un user grâce à son id
-   *
-   * @param int id
+   * @param int $id
    * @return string
    */
-  public function getUserById($id) {
-    $db = $this->db;
-    $query = "SELECT * FROM `user` WHERE id = :id";
+  public function getUserById($id) : User
+  {
+    try {
+      $req = $this->db->prepare('SELECT * FROM `user` WHERE id = :id');
+      $req->bindValue(':id', $id, \PDO::PARAM_INT);
 
-    $req = $db->prepare($query);
-    $req->bindValue(':id', $id, \PDO::PARAM_INT);
-
-    $req->execute();
-    $row = $req->fetch(\PDO::FETCH_ASSOC);
-    if($row['isAdmin'] == 1){
+      $req->execute();
+      $row = $req->fetch(\PDO::FETCH_ASSOC);
+      if($row['isAdmin'] == 1){
         $user = new Admin($row);
-    }elseif($row['isAdmin'] == 0){
+      }
+      elseif($row['isAdmin'] == 0){
         $user = new Standard($row);
-    }
-
-    return $user;
+      }
+      return $user;
+    } 
+    catch (\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "error getUserById function in UserManager.php";
+    } 
   }
 
   /**
-   * permet d'ajouter un user
-   *
    * @param string $name
    * @param string $lastName
    * @param string $mail
@@ -77,7 +79,8 @@ class UserManager extends BaseManager
    * @param boolean $isAdmin
    * @return string
    */
-  public function addUser(string $name, string $lastName, string $mail, string $password, bool $isAdmin) {
+  public function addUser(string $name, string $lastName, string $mail, string $password, bool $isAdmin) 
+  {
     $db = $this->db;
     
     $query = "INSERT INTO `user` (`id`, `name`, `lastName`, `mail`, `password`, `isAdmin`) VALUES (NULL, :namee, :lastName, :mail, :passwrd, :isAdmin)";

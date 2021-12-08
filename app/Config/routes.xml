@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-
-<routes>
-    <route path="/" action="index" controller="PostController"/>
-    <route path="show" action="show" controller="PostController" params="id"/>
-    <route path="user" action="user" controller="PostController" params="id"/>
-</routes>

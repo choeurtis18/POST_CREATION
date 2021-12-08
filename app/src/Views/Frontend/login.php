@@ -444,35 +444,15 @@
     }
 </style>
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
 
-$('.card__info').each(function (f) {
+        $('.card__info').each(function (f) {
 
-var newstr = $(this).text().substring(0,200);
-$(this).text(newstr);
+            var newstr = $(this).text().substring(0,200);
+            $(this).text(newstr);
 
-});
-})
+        });
+    })
 </script>
-<div class="container">
-    <div class="card__container">
-        <?php
-
-        foreach($posts as $post) {
-        ?>
-        <div class="card">
-            <div class="card__content">
-                <h3 class="card__header"><?php echo $post->getTitle(); ?></h3>
-                <p class="card__info" maxlength="20" ><?php echo $post->getContent(); ?></p>
-                <button class="card__button" maxlength="20" >Read now</button>
-            </div>
-        </div>
-            <?php
-
-        }
-        ?>
-
-    </div>
-</div>
 
 

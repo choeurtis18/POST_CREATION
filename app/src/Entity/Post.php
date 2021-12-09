@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Fram\Factories\PDOFactory;
+use App\Manager\UserManager;
+
 class Post
 {
     private int $id;
@@ -104,6 +107,16 @@ class Post
         $this->authorId = $authorId;
     }
 
+    /**
+     * @param int $id
+     * @return Author|Null|bool
+     */
+    public function getPostAuthor(int $id)
+    {
+        $userManager = new UserManager(PDOFactory::getMysqlConnection());
+        $author = $userManager->getUserById($id);
 
+        return $author;
+    }
 
 }

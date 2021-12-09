@@ -38,14 +38,16 @@
         <div class="addComment-card">
             <div class="addComment-card-container">
                 <h3 id="addComment-title-id">Comments</h3>
-                <div class="addComment-card-content">
+                <form class="addComment-card-content" action="/submit-add-comment/" method="POST">
                     <input type="text" name="post-id" value="<?= $post->getId() ?>" hidden>
+                    <input type="text" id="author-id" name="author-id" value="<?= $post->getAuthorId() ?>" hidden>
+                    
                     <label for="author-id">Author:</label><br>
-                    <input type="text" id="author-id" name="author-id" value="<?= $post->getPostAuthor($post->getAuthorId())->getName() ?>" disabled="disabled"><br>
-                    <label for="comment-content">Cotent:</label><br>
+                    <input type="text" id="author-name" name="author-name" value="<?= $post->getPostAuthor($post->getAuthorId())->getName() ?>" disabled="disabled"><br>
+                    <label for="comment-content">Content:</label><br>
                     <textarea id="comment-content" rows="5" cols="50" name="comment-content" value="Doe"></textarea><br><br>
                     <input type="submit" value="Submit"><br><br><br><br>
-                </div>
+                </form>
             </div>
         </div>
         <h3 id="comment-title-id">Comments</h3>

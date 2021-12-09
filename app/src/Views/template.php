@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!--Lien Boostrap + page css-->
-    <link rel="stylesheet" href="../Assets/style.css">
     <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../Assets/Css/style.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!--Import JQuery-->
@@ -19,7 +20,7 @@
     <nav>
         <a href="/">Acceuil</a>
         <!-- <a href="#">CODING</a> -->
-        <a href="#">Connexion</a>
+        <a href="register">Inscription</a>
         <div id="indicator"></div>
     </nav>
 

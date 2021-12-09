@@ -1,27 +1,3 @@
-<style>
-.post-container h1 {
-    margin: 50px 0px 80px 20px;
-}
-
-.post-container .post-card {
-    width: 100%;
-    margin: 0 0 50px 0;
-}
-.post-container .post-card-container {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 70%;
-    border-radius: 5px;
-    text-align: center;
-    margin: 0 auto;
-}
-.comment-title-id h3 {
-    width: 100%;
-    margin: 0 0px 20px 0px;
-    font-weight: bold;
-}
-
-</style>
 
 <div class="post-container">
     <h1>Welcome IN VVS Club</h1>

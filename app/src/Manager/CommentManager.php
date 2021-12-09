@@ -6,8 +6,10 @@ use App\Entity\Comment;
 
 class CommentManager extends BaseManager
 {
-
-    public function getAllComments(int $number=null): array
+    /**
+     * @return Comment[]|NULL|bool
+     */
+    public function getAllComments()
     {
         try {
             $query = $this->db->prepare('SELECT * FROM `comment`');
@@ -24,7 +26,10 @@ class CommentManager extends BaseManager
         } 
     }
 
-    public function getAllCommentsByPostId(int $id): array
+    /**
+     * @return Comment[]|NULL|bool
+     */
+    public function getAllCommentsByPostId(int $id)
     {
         try {
             $query = $this->db->prepare('SELECT * FROM `comment` WHERE postId=:id');
@@ -37,15 +42,16 @@ class CommentManager extends BaseManager
             };
             return $comments;
         } catch (\Exception $e) {
+            var_dump("TA GRAND MERE");
             die('Erreur : '.$e->getMessage());
             return "error getAllComments function in CommentManager.php";
         } 
     }
     /**
      * @param int $id
-     * @return Comment
+     * @return Comment|NULL|bool
      */
-    public function getCommentById(int $id): Comment
+    public function getCommentById(int $id)
     {
         try {
             $req = $this->db->prepare('SELECT * FROM comment WHERE id=:id');
@@ -63,9 +69,10 @@ class CommentManager extends BaseManager
 
     /**
      * @param Comment $comment
-     * @return Comment|bool
+     * @return Comment|NULL|bool
      */
-    public function createComment(Comment $comment) {
+    public function createComment(Comment $comment) 
+    {
         try {
             $query = $this->db->prepare("INSERT INTO `comment` (`id`, `publishedDate`, `content`, `authorId`, `postId`) VALUES (NULL, :publishedDate ,:content ,:authorId, :postId)");
             $query ->bindValue(':content' , $comment->getContent(), \PDO::PARAM_STR);
@@ -80,8 +87,8 @@ class CommentManager extends BaseManager
     }
 
 /**
-     * @param Comment $Comment
-     * @return Comment|bool A revoir
+     * @param Comment $comment
+     * @return Comment|NULL|bool
      */
     public function updateComment(Comment $comment)
     {

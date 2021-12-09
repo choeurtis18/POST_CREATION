@@ -37,6 +37,7 @@
 
     <div class="card__container">
         <?php
+        if($posts != NULL){
         foreach($posts as $post) {
         ?>
         <div class="post-card">
@@ -51,8 +52,12 @@
             <a href="/post/<?= $post->getId();?>"><button class="post-card-button">+ Read now</button><a>
             <a href="/add-comment/<?= $post->getId();?>"><button class="post-card-button">+ Add Comment</button><a>
         </div>
-            <?php
-
+        
+        <?php
+        }}else{
+        ?>
+        <p>No post Found</p>
+        <?php  
         }
         ?>
 

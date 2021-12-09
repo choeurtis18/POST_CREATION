@@ -23,9 +23,9 @@ class UserManager extends BaseManager
   }
 
   /**
-   * @return array
+   * @return User[]|NULL|bool
    */
-  public function getAllUsers() :array
+  public function getAllUsers()
   {
     try {
       $query = $this->db->prepare('SELECT * FROM `user`');
@@ -49,9 +49,9 @@ class UserManager extends BaseManager
 
   /**
    * @param int $id
-   * @return string
+   * @return User|NULL|bool
    */
-  public function getUserById($id) : User
+  public function getUserById($id)
   {
     try {
       $query = $this->db->prepare('SELECT * FROM `user` WHERE id = :id');
@@ -75,7 +75,7 @@ class UserManager extends BaseManager
 
   /**
      * @param User $user
-     * @return User|bool
+     * @return User||NULL|bool
      */
   public function createUser(User $user) 
   {
@@ -98,7 +98,7 @@ class UserManager extends BaseManager
 
   /**
      * @param User $user
-     * @return User|bool
+     * @return User||NULL|bool
      */
   public function updateUser(User $user) 
   {
@@ -121,9 +121,9 @@ class UserManager extends BaseManager
 
   /**
    * @param int $id
-   * @return array
+   * @return Post[]|NULL|bool
    */
-  public function getUserPosts($id) :array
+  public function getUserPosts($id)
   {
     try {
       $query = $this->db->prepare("SELECT * FROM `post` WHERE `authorid`= :id");
@@ -143,9 +143,9 @@ class UserManager extends BaseManager
 
   /**
    * @param int $id
-   * @return array
+   * @return Comment[]|NULL|bool
    */
-  public function getUserComments($id) :array
+  public function getUserComments($id)
   {
     try {
       $query = $this->db->prepare("SELECT * FROM `comment` WHERE `authorid`= :id");

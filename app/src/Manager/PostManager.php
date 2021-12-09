@@ -3,6 +3,7 @@
 namespace App\Manager;
 
 use App\Entity\Post;
+use App\Controller\ErrorController;
 use PDO;
 
 class PostManager extends BaseManager
@@ -10,9 +11,9 @@ class PostManager extends BaseManager
 
 
     /**
-     * @return array
+     * @return array|NULL|bool
      */
-    public function getAllPosts(): array
+    public function getAllPosts()
     {
         try {
             $query = $this->db->prepare('SELECT * FROM `post`');
@@ -31,9 +32,9 @@ class PostManager extends BaseManager
 
     /**
      * @param int $id
-     * @return Post
+     * @return Post|NULL|bool
      */
-    public function getPostById(int $id): Post
+    public function getPostById(int $id)
     {
         try {
             $req = $this->db->prepare('SELECT * FROM post WHERE id=:id');
@@ -41,8 +42,13 @@ class PostManager extends BaseManager
 
             $req->execute();
             $row = $req->fetch(PDO::FETCH_ASSOC);
-            $post = new Post($row);
-            return $post;
+
+            if($row == true){
+                $post = new Post($row);
+                return $post;
+            }else {
+                return new ErrorController('error404');
+            }
         } catch (\Exception $e) {
             die('Erreur : '.$e->getMessage());
             return "error getPostById function in PostManager.php";
@@ -52,7 +58,7 @@ class PostManager extends BaseManager
 
     /**
      * @param Post $post
-     * @return Post|bool
+     * @return Post|bool|null
      */
     public function createPost(Post $post)
     {
@@ -71,7 +77,7 @@ class PostManager extends BaseManager
 
     /**
      * @param Post $post
-     * @return Post|bool A revoir
+     * @return Post|bool|null
      */
     public function updatePost(Post $post)
     {
@@ -105,6 +111,7 @@ class PostManager extends BaseManager
             $req->bindValue(':id', $id, PDO::PARAM_INT);
 
             $req->execute();
+            return true;
         } catch (\Exception $e) {
             die('Erreur : '.$e->getMessage());
             return "error deletePostById function in PostManager.php";

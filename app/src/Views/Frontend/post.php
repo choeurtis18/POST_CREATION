@@ -1,8 +1,4 @@
 <style>
-.post-container h1 {
-    margin: 50px 0px 80px 20px;
-}
-
 .post-container .post-card {
     width: 100%;
     margin: 0 0 50px 0;
@@ -25,8 +21,6 @@
 </style>
 
 <div class="post-container">
-    <h1>Welcome IN VVS Club</h1>
-
     <div class="card__container">
         <div class="post-card">
         <div class="post-card-container">

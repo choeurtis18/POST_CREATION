@@ -17,11 +17,38 @@
     <title><?= $title; ?></title>
 </head>
 <body style="margin: 50px 100px 50px 100px">
-    <nav>
-        <a href="/">Acceuil</a>
-        <!-- <a href="#">CODING</a> -->
-        <a href="register">Inscription</a>
-        <div id="indicator"></div>
+    <style>
+        .navbar {
+            display: flex;
+            width: 100%;
+            margin: auto;
+            justify-content: space-between;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .navbar-option {
+            text-decoration: none;
+            padding: 1rem 2rem 1.15rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: #ebebeb;
+            min-width: 80px;
+            margin: auto;
+        }
+        .navbar-option:hover {
+            background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
+            background-size: 100% 100%;
+            color: #27262c;
+            animation: spring 300ms ease-out;
+            text-shadow: 0 -1px 0 #ef816c;
+            font-weight: bold;
+        }
+    </style>
+    <nav class="navbar" style="margin: 0 20px 0 20px;">
+        <a class="navbar-option" href="/">Accueil</a>
+        <a class="navbar-option" href="/login/">Connexion</a>
+        <a class="navbar-option" href="/register/">Inscription</a>
+        <a class="navbar-option" href="/add-post/">Créer un Post</a>
     </nav>
 
     <div class="container">

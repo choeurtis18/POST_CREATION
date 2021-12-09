@@ -3,8 +3,12 @@
 <routes>
     <!--FrontEnd -->
     <route path="/" action="home" controller="FrontController"/>
-    <route path="/" action="login" controller="FrontController"/>
-
+    <route path="post" action="showPost" controller="PostController" params="id"/>
+    <route path="add-comment" action="addComment" controller="PostController" params="id"/>
+    <route path="add-post" action="addPost" controller="PostController"/>
+    <route path="submit-add-post" action="submitPost" controller="PostController"/>
+    <route path="submit-add-comment" action="submitComment" controller="PostController"/>
+    
     <!--Security-->
     <route path="login" action="login" controller="SecurityController"/>
     <route path="login-function" action="loginFunction" controller="SecurityController"/>

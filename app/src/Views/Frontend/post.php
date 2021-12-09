@@ -15,7 +15,8 @@
     text-align: center;
     margin: 0 auto;
 }
-.comment-title-id h3 {
+
+.comment-title-id, .addComment-title-id{
     width: 100%;
     margin: 0 0px 20px 0px;
     font-weight: bold;
@@ -40,7 +41,19 @@
             </div>
         </div>
         </div>
-
+        <div class="addComment-card">
+            <div class="addComment-card-container">
+                <h3 id="addComment-title-id">Comments</h3>
+                <div class="addComment-card-content">
+                    <input type="text" name="post-id" value="<?= $post->getId() ?>" hidden>
+                    <label for="author-id">Author:</label><br>
+                    <input type="text" id="author-id" name="author-id" value="<?= $post->getPostAuthor($post->getAuthorId())->getName() ?>" disabled="disabled"><br>
+                    <label for="comment-content">Cotent:</label><br>
+                    <textarea id="comment-content" rows="5" cols="50" name="comment-content" value="Doe"></textarea><br><br>
+                    <input type="submit" value="Submit"><br><br><br><br>
+                </div>
+            </div>
+        </div>
         <h3 id="comment-title-id">Comments</h3>
         <hr>
         <?php

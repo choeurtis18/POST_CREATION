@@ -51,14 +51,11 @@ class PostController extends BaseController
     public function executeAddPost()
     {
         Flash::setFlash('alert', 'je suis une alerte');
-        $userManager = new UserManager(PDOFactory::getMysqlConnection());
-        $user = $userManager->getUserById($this->params["id"]);
         
         //Call add post function
         $this->render(
             'add-post.php',
             [
-                'user' => $user,
                 'message' => Null
             ],
             'Home Page'

@@ -15,24 +15,12 @@
     text-align: center;
     margin: 0 auto;
 }
-.post-container h3 {
+.comment-title-id h3 {
     width: 100%;
-    margin: 0 20px 20px 20px;
+    margin: 0 0px 20px 0px;
+    font-weight: bold;
 }
 
-.post-container .card__container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.post-container .comment-card {
-    flex: 1;
-    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
-    margin: 0px 20px 0px 20px;
-}
-.post-container .comment-card-container {
-    padding: 0.01em 16px;
-}
 </style>
 
 <div class="post-container">
@@ -45,24 +33,24 @@
                 <h3><?php echo $post->getTitle(); ?></h3>
             </header>
             <div class="post-card-content">
-                <p><?php echo $post->getPublishedDate()->format('Y-m-d'); ?></p>
+                <p>Ecrit par : <?= $post->getPostAuthor($post->getAuthorId())->getName() ?></p>
+                <p>Le : <?= $post->getPublishedDate()->format('Y-m-d'); ?></p>
                 <hr>
                 <p><?php echo $post->getContent(); ?>.</p><br>
             </div>
         </div>
         </div>
 
-        <h3>Comments</h3>
+        <h3 id="comment-title-id">Comments</h3>
+        <hr>
         <?php
         if($comments != NULL){
         foreach($comments as $comment) {
         ?>
         <div class="comment-card">
-            <div class="comment-card-container">
-                <p><?php echo $comment->getPublishedDate()->format('Y-m-d'); ?></p>
-                <hr>
-                <p><?php echo $comment->getContent(); ?>.</p><br>
-            </div>
+            <p>Ecrit par <?= $comment->getCommentAuthor($comment->getAuthorId())->getName(); ?> le <?= $comment->getPublishedDate()->format('Y-m-d'); ?></p>
+            <p><?= $comment->getContent(); ?></p>
+            <hr>
         </div>
         <?php
         }

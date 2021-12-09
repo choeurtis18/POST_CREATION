@@ -45,12 +45,12 @@
                 <h3><?php echo $post->getTitle(); ?></h3>
             </header>
             <div class="post-card-container">
-                <p><?php echo $post->getPublishedDate()->format('Y-m-d'); ?></p>
+                <p>Ecrit par : <?= $post->getPostAuthor($post->getAuthorId())->getName() ?></p>
+                <p>Le : <?= $post->getPublishedDate()->format('Y-m-d'); ?></p>
                 <hr>
                 <p><?php echo $post->getContent(); ?>.</p><br>
             </div>
             <a href="/post/<?= $post->getId();?>"><button class="post-card-button">+ Read now</button><a>
-            <a href="/add-comment/<?= $post->getId();?>"><button class="post-card-button">+ Add Comment</button><a>
         </div>
         
         <?php

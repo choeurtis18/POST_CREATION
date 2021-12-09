@@ -117,4 +117,5 @@ class PostManager extends BaseManager
             return "error deletePostById function in PostManager.php";
         }  
     }
+
 }

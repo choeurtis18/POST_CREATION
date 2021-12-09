@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Fram\Factories\PDOFactory;
+use App\Manager\UserManager;
+
 class Comment
 {
     private int $id;
@@ -107,5 +110,17 @@ class Comment
         $this->postId = $postId;
 
         return $this;
+    }
+
+    /**
+     * @param int $id
+     * @return Author|Null|bool
+     */
+    public function getCommentAuthor(int $id)
+    {
+        $userManager = new UserManager(PDOFactory::getMysqlConnection());
+        $author = $userManager->getUserById($id);
+
+        return $author;
     }
 }

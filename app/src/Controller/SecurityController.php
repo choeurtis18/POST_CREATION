@@ -29,25 +29,9 @@ class SecurityController extends BaseController{
         $loggedInUser = $userManager->login($username,$password);
         if ($loggedInUser) {
             $this->createUserSession($loggedInUser);
-            $postManager = new PostManager(PDOFactory::getMysqlConnection());
-            $posts = $postManager->getAllPosts();
-
             header('Location: /');
-            $this->render(
-                'home.php',
-                [
-                    'posts' => $posts,
-                    'user' => $loggedInUser
-                ],
-                'Home Page'
-            );
         } else {
-            $this->render(
-                'login.php',
-                [
-                ],
-                'Login Page'
-            );
+            header("Location: /login?error_message=erreur connexion");
         }
     }
 
@@ -77,29 +61,27 @@ class SecurityController extends BaseController{
             "mail" => $_POST['mail'],
             "password" => $_POST['password'],
             "isAdmin" => (bool)$_POST['isAdmin'],
-
         ]);
 
-
-
         $new_user=$userManager->createUser($user);
-
-
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $posts = $postManager->getAllPosts();
-        $this->render(
-            'home.php',
-            [
-                'posts' => $posts,
-                'user' => $new_user
-            ],
-            'Home Page'
-        );
+        if($new_user != false) {
+            $postManager = new PostManager(PDOFactory::getMysqlConnection());
+            $posts = $postManager->getAllPosts();
+            $this->createUserSession($new_user);
+            header("Location: /");
+        } else {
+            header("Location: /register?error_message=erreur inscription");
+        }
     }
 
     public function executeLogout(){
-
+        $this->exitUserSession();
     }
 
-
+    public function exitUserSession() {
+        $_SESSION['user_id'] = Null;
+        $_SESSION['username'] = Null;
+        $_SESSION['email'] = Null;
+        header('Location: /');
+    }
 }

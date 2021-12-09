@@ -44,11 +44,15 @@
             font-weight: bold;
         }
     </style>
-    <nav class="navbar" style="margin: 0 20px 0 20px;">
+    <nav class="navbar" style="margin: 0 20px 20px 20px;">
         <a class="navbar-option" href="/">Accueil</a>
+        <?php if($_SESSION['user_id'] == NULL) { ?>
         <a class="navbar-option" href="/login/">Connexion</a>
         <a class="navbar-option" href="/register/">Inscription</a>
+        <?php }else { ?>
         <a class="navbar-option" href="/add-post/">Créer un Post</a>
+        <a class="navbar-option" href="/logout/">Logout</a>
+        <?php } ?>
     </nav>
 
     <div class="container">

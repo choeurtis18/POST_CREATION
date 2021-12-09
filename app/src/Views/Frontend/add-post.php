@@ -1,6 +1,6 @@
 <style>
 .addPost-container h1 {
-    margin: 50px 0px 80px 20px;
+    margin: 50px 0px 80px 0px;
 }
 
 .addPost-container .card {
@@ -15,11 +15,11 @@
 
     <div class="card">
         <form action="/submit-add-post/" method="POST">
-            <input type="text" id="author-id" name="author-id" value="1" hidden>
+            <input type="text" id="author-id" name="author-id" value="<?= $_SESSION['user_id'] ?>" hidden>
 
             <input type="text" class="input" name="post-title" placeholder="Title" /><br>
             <label for="post-content">Content:</label><br>
-            <textarea rows="3" cols="30" name="post-content" id="post-content"></textarea><br><br>
+            <textarea rows="5" cols="50" name="post-content" id="post-content"></textarea><br><br>
             
             <input type="submit" value="Submit">
         </form> 

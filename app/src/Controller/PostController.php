@@ -68,17 +68,8 @@ class PostController extends BaseController
         $postManager = new PostManager(PDOFactory::getMysqlConnection());
         $p = new Post(["publishedDate"=>date("Y-m-d"), "title"=>$_POST['post-title'], "authorId"=>$_POST['author-id'], "content"=>$_POST['post-content']]);
         $post = $postManager->createPost($p);
-        $posts = $postManager->getAllPosts();
         
         header('Location: /');
-        $this->render(
-            'home.php',
-            [
-                'posts' => $posts
-            ],
-            'Home Page'
-        );
-        
         
     }
 

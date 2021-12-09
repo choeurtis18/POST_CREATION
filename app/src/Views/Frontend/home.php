@@ -1,6 +1,7 @@
 <style>
 .home-container h1 {
     margin: 50px 0px 80px 20px;
+    text-align: center;
 }
 .card__container {
     display: flex;
@@ -33,7 +34,7 @@
 </style>
 
 <div class="home-container">
-    <h1>Welcome IN VVS Club</h1>
+    <h1>Welcome to JumyJi</h1>
 
     <div class="card__container">
         <?php

@@ -40,7 +40,7 @@ class PostController extends BaseController
         
         //Call add comment function
         $this->render(
-            'add-comment.php',
+            'post.php',
             [
                 'post' => $post,
                 'message' => Null
@@ -93,6 +93,9 @@ class PostController extends BaseController
         $post = $postManager->getPostById($_POST['post-id']);
         $comments = $commentManager->getAllCommentsByPostId($post->getId());
         
+
+        $header = "Location: /post/" . $post->getId();
+        header($header);
         $this->render(
             'post.php',
             [

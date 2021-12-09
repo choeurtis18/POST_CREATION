@@ -73,6 +73,35 @@ class UserManager extends BaseManager
     } 
   }
 
+    /**
+   * @param User $user
+   * @return User|NULL|bool
+   */
+  public function getUserByAtribut(User $user)
+  {
+    try {
+      $query = $this->db->prepare('SELECT * FROM `user` WHERE `name` = :namee AND lastName = :lastName AND mail = :mail AND `password` = :passwordd');
+      $query->bindValue(':namee', $user->getName(), \PDO::PARAM_INT);
+      $query->bindValue(':lastName', $user->getLastName(), \PDO::PARAM_INT);
+      $query->bindValue(':mail', $user->getMail(), \PDO::PARAM_INT);
+      $query->bindValue(':passwordd', $user->getPassword(), \PDO::PARAM_INT);
+
+      $query->execute();
+      $row = $query->fetch(\PDO::FETCH_ASSOC);
+      if($row['isAdmin'] == 1){
+        $user = new Admin($row);
+      }
+      elseif($row['isAdmin'] == 0){
+        $user = new Standard($row);
+      }
+      return $user;
+    } 
+    catch (\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "error getUserById function in UserManager.php";
+    } 
+  }
+
   /**
      * @param User $user
      * @return User||NULL|bool
@@ -88,6 +117,10 @@ class UserManager extends BaseManager
         $query->bindValue(':passwrd', $user->getPassword(), PDO::PARAM_STR);
         $query->bindValue(':isAdmin', $user->getIsAdmin(), PDO::PARAM_INT);
         $query->execute();
+
+        return $this->getUserByAtribut($user);
+      } else {
+        return false;
       }
     }
     catch (\Exception $e) {
@@ -186,7 +219,8 @@ class UserManager extends BaseManager
     
   }
 
-  public function login($mail,$password){
+  public function login($mail,$password)
+  {
     try {
       $query = $this->db->prepare('SELECT * FROM user WHERE mail=:mail and password=:password' );
       $query->bindValue(':mail',$mail);

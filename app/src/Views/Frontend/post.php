@@ -54,6 +54,7 @@
 
         <h3>Comments</h3>
         <?php
+        if($comments != NULL){
         foreach($comments as $comment) {
         ?>
         <div class="comment-card">
@@ -63,6 +64,11 @@
                 <p><?php echo $comment->getContent(); ?>.</p><br>
             </div>
         </div>
+        <?php
+        }
+        }else {
+        ?>
+            <p>No comment Found</p>
         <?php
         }
         ?>

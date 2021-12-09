@@ -9,14 +9,15 @@ class AdminManager extends UserManager
 {
   /**
     * @param int $id
-    * @return bool
+    * @return bool|NULL|bool
   */
-  public function DeleteUserById(int $id) 
+  public function deleteUserById(int $id) 
   {
     try {
       $query = $this->db->prepare("DELETE FROM user WHERE id = :ID");
-      $query->bindValue(':ID', $ID, \PDO::PARAM_INT);  
+      $query->bindValue(':ID', $id, \PDO::PARAM_INT);  
       $query->execute();
+      return true;
     }
     catch (\Exception $e) {
       die('Erreur : '.$e->getMessage());

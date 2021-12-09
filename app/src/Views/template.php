@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!--Lien Boostrap + page css-->
-    <link rel="stylesheet" href="../Assets/style.css">
     <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../Assets/Css/style.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!--Import JQuery-->
@@ -45,9 +46,9 @@
     </style>
     <nav class="navbar" style="margin: 0 20px 0 20px;">
         <a class="navbar-option" href="/">Accueil</a>
-        <a class="navbar-option" href="#">Connexion</a>
+        <a class="navbar-option" href="/login/">Connexion</a>
+        <a class="navbar-option" href="/register/">Inscription</a>
         <a class="navbar-option" href="/add-post/">Créer un Post</a>
-        <div id="indicator"></div>
     </nav>
 
     <div class="container">

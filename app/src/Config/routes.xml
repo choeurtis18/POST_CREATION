@@ -7,12 +7,15 @@
     <route path="add-comment" action="addComment" controller="PostController" params="id"/>
     <route path="add-post" action="addPost" controller="PostController"/>
     <route path="submit-add-post" action="submitPost" controller="PostController"/>
-     <route path="submit-add-comment" action="submitComment" controller="PostController"/>
+    <route path="submit-add-comment" action="submitComment" controller="PostController"/>
     
     <!--Security-->
     <route path="login" action="login" controller="SecurityController"/>
-    <route path="register" action="login" controller="SecurityController"/>
-    <route path="login" action="signup" controller="SecurityController"/>
+    <route path="login-function" action="loginFunction" controller="SecurityController"/>
+    <route path="register" action="register" controller="SecurityController"/>
+    <route path="register-function" action="registerFunction" controller="SecurityController"/>
+
+    <route path="logout" action="logout" controller="SecurityController"/>
 
 
 </routes>

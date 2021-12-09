@@ -186,5 +186,28 @@ class UserManager extends BaseManager
     
   }
 
+  public function login($mail,$password){
+    try {
+      $query = $this->db->prepare('SELECT * FROM user WHERE mail=:mail and password=:password' );
+      $query->bindValue(':mail',$mail);
+      $query->bindValue(':password',$password);
+      $query->execute();
+
+      while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+        if($row['isAdmin'] == 1){
+          $user = new Admin($row);
+        }elseif($row['isAdmin'] == 0){
+          $user = new Standard($row);
+        }
+        return $user;
+      };
+
+
+    } catch (\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "PASBON";
+    }
+  }
+
 }
 ?>

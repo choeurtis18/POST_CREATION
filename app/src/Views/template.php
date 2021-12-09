@@ -46,7 +46,7 @@
     <nav class="navbar" style="margin: 0 20px 0 20px;">
         <a class="navbar-option" href="/">Accueil</a>
         <a class="navbar-option" href="#">Connexion</a>
-        <a href="/add-post/">Créer un Post</a>
+        <a class="navbar-option" href="/add-post/">Créer un Post</a>
         <div id="indicator"></div>
     </nav>
 

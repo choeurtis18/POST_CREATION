@@ -51,6 +51,7 @@
         <a class="navbar-option" href="/register/">Inscription</a>
         <?php }else { ?>
         <a class="navbar-option" href="/add-post/">Créer un Post</a>
+        <a class="navbar-option" href="/user-post/">My post</a>
         <a class="navbar-option" href="/logout/">Logout</a>
         <?php } ?>
     </nav>

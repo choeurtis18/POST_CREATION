@@ -3,7 +3,10 @@
 <routes>
     <!--FrontEnd -->
     <route path="/" action="home" controller="FrontController"/>
+    <route path="user-post" action="showUserPost" controller="PostController"/>
+
     <route path="post" action="showPost" controller="PostController" params="id"/>
+
     <route path="add-comment" action="addComment" controller="PostController" params="id"/>
     <route path="add-post" action="addPost" controller="PostController"/>
     <route path="submit-add-post" action="submitPost" controller="PostController"/>

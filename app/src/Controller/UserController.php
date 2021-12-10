@@ -43,13 +43,13 @@ class UserController extends BaseController
         $userManager = new UserManager(PDOFactory::getMysqlConnection());
         $user=new User([
             "id" => $_POST['id'],
-            "name" => $_POST['lastname'],
-            "lastName" => $_POST['firstname'],
+            "name" => $_POST['firstname'],
+            "lastName" => $_POST['lastname'],
             "mail" => $_POST['email'],
             "password" => $_POST['password'],
             "isAdmin" => (bool)isset($_POST['isAdmin']),
         ]);
-        $_SESSION['firstname']=$user->getname();
+        $_SESSION['firstname']=$user->getName();
         $user=$userManager->updateUser($user);
         if((bool)isset($_POST['isAdmin']) == true){
             $_SESSION['admin'] = 1;

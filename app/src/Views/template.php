@@ -57,7 +57,7 @@
                 <a class="navbar-option" href="/admin">Gérer les utilisateurs</a>
             <?php } ?>
 
-            <a class="navbar-option" href="/logout/">Logout</a>
+            <a class="navbar-option" href="/logout/">Se Déconnecter</a>
 
 
         <?php } ?>

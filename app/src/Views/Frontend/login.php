@@ -5,7 +5,7 @@
         <div class="form-holder">
             <input type="email" class="input" name="mail" placeholder="Email" />
             <span class="invalidFeedback"></span>
-            <input type="password" class="input" placeholder="Password" name="password"/>
+            <input type="password" class="input" placeholder="Mot De Passe" name="password"/>
         </div>
         <button class="submit-btn">Connexion</button>
     </form>

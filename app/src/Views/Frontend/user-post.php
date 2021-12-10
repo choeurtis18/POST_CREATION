@@ -97,22 +97,22 @@
                     ecrit par : <?= $post->getPostAuthor($post->getAuthorId())->getName() ?> 
                     le <?= $post->getPublishedDate()->format('Y-m-d'); ?>
                 </p>
-                <a class="link" href="/post/<?= $post->getId();?>">Read more </a>|
-                <a class="link">Edit </a>|
-                <a class="link">Delete</a>
+                <a class="link" href="/post/<?= $post->getId();?>">Afficher le Post <a> |
+                <a class="link" href="/edit-post/<?= $post->getId();?>">Modifier <a> |
+                <a class="link" href="/delete-post/<?= $post->getId();?>">Supprimer <a>
                 <h3 class="title text-center"><?php echo $post->getTitle(); ?></h3>
                 <div class="divider"></div>
                 <p class="paragraph text-justify"><?php echo $post->getContent(); ?></p>
             </div>
-            <a href="/post/<?= $post->getId();?>"><button class="post-card-button">+ Read now</button><a>
-            <a href="/edit-post/<?= $post->getId();?>"><button class="post-card-button">+ Edit post</button><a>
-            <a href="/delete-post/<?= $post->getId();?>"><button class="post-card-button">+ Delete post</button><a>
+            <a class="link" href="/post/<?= $post->getId();?>">En Savoir plus<a> |
+            <a class="link" href="/edit-post/<?= $post->getId();?>">Modifiert<a> |
+            <a class="link" href="/delete-post/<?= $post->getId();?>">Supprimer<a>
         </div>
         
         <?php
         }}else{
         ?>
-        <p>No post Found</p>
+        <p>Aucun Post n'a été publié</p>
         <?php  
         }
         ?>

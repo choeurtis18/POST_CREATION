@@ -1,5 +1,5 @@
 <div class="home-container">
-    <h1>Welcome to JumyJi</h1>
+    <h1>Bienvenue à JumyJi</h1>
 
     <div class="card__container">
         <?php
@@ -14,7 +14,7 @@
                     ecrit par : <?= $post->getPostAuthor($post->getAuthorId())->getName() ?> 
                     le <?= $post->getPublishedDate()->format('Y-m-d'); ?>
                 </p>
-                <a class="link" href="/post/<?= $post->getId();?>">Read more </a>
+                <a class="link" href="/post/<?= $post->getId();?>">Afficher le Post</a>
                 <h3 class="title text-center"><?php echo $post->getTitle(); ?></h3>
                 <div class="divider"></div>
                 <p class="paragraph text-justify"><?php echo $post->getContent(); ?></p>

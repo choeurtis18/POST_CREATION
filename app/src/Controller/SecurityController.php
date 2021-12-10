@@ -43,7 +43,6 @@ class SecurityController extends BaseController{
         $_SESSION['email'] = $user->getMail();
         $_SESSION['password'] = $user->getPassword();
         $_SESSION['admin'] = $user->getIsAdmin();
-
     }
 
 
@@ -60,8 +59,8 @@ class SecurityController extends BaseController{
         $userManager = new UserManager(PDOFactory::getMysqlConnection());
 
         $user=new User([
-            "name" => $_POST['name'],
-            "lastName" => $_POST['firstname'],
+            "firstname" => $_POST['firstname'],
+            "lastName" => $_POST['lastname'],
             "mail" => $_POST['mail'],
             "password" => $_POST['password'],
             "isAdmin" => (bool)$_POST['isAdmin'],

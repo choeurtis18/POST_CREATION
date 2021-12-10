@@ -1,16 +1,78 @@
 <style>
-.post-container .post-card {
-    width: 100%;
-    margin: 0 0 50px 0;
-}
-.post-container .post-card-container {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 70%;
-    border-radius: 5px;
-    text-align: center;
-    margin: 0 auto;
-}
+    .card__container {
+        width: 100%;
+    }
+
+    .blog-card {
+        background-color: white;
+        border-radius: 1px;
+        box-shadow: 0 0 2px -1px rgba(0, 0, 0, 0.75);
+        margin: 0 auto;
+        height: 85vh;
+        margin-bottom: 20px;
+        max-width: 1200px;
+        overflow: hidden;
+
+        @media (max-width: 700px) {
+            height: 200px;
+            overflow: visible;
+        }
+    }
+
+    .media {
+        float: left;
+        background-position: center;
+        background-size: cover;
+        height: 100%;
+    }
+
+    .card-body {
+        float: right;
+        color: #000;
+        height: 100%;
+        padding: 30px 20px 50px;
+    }
+
+    .tagline {
+        font-size: 10px;
+        text-transform: uppercase;
+    }
+
+    .title {
+        color: #000;
+        font-family: "Playfair Display SC";
+        font-size: 27px;
+        font-weight: 400;
+    }
+
+    .divider {
+        background: #000;
+        height: 2px;
+        margin: 10px auto;
+        width: 40px;
+    }
+
+    .paragraph {
+        font-weight: 300;
+    }
+    .link {
+        color: #000!important;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+    }
+    .link:hover {
+        color: #337ab7!important;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        .media {
+            display: none;
+        }
+        .col-xs-6 {
+            width: 100%;
+        }
+    }
 
 .comment-title-id, .addComment-title-id{
     width: 100%;
@@ -22,18 +84,17 @@
 
 <div class="post-container">
     <div class="card__container">
-        <div class="post-card">
-        <div class="post-card-container">
-            <header class="post-card-header-content">
-                <h3><?php echo $post->getTitle(); ?></h3>
-            </header>
-            <div class="post-card-content">
-                <p>Ecrit par : <?= $post->getPostAuthor($post->getAuthorId())->getName() ?></p>
-                <p>Le : <?= $post->getPublishedDate()->format('Y-m-d'); ?></p>
-                <hr>
-                <p><?php echo $post->getContent(); ?>.</p><br>
+    <div class="blog-card">
+            <div class="media col-sm-6 col-xs-6" style="background-image: url('<?= $post->getImage() ?>')"></div>
+            <div class="card-body col-sm-6 col-xs-6">
+                <p class="tagline text-center">
+                    ecrit par : <?= $post->getPostAuthor($post->getAuthorId())->getName() ?> 
+                    le <?= $post->getPublishedDate()->format('Y-m-d'); ?>
+                </p>
+                <h3 class="title text-center"><?php echo $post->getTitle(); ?></h3>
+                <div class="divider"></div>
+                <p class="paragraph text-justify"><?php echo $post->getContent(); ?></p>
             </div>
-        </div>
         </div>
         <?php if($_SESSION['user_id'] != NULL) { ?>
         <div class="addComment-card">

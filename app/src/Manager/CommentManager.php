@@ -42,7 +42,6 @@ class CommentManager extends BaseManager
             };
             return $comments;
         } catch (\Exception $e) {
-            var_dump("TA GRAND MERE");
             die('Erreur : '.$e->getMessage());
             return "error getAllComments function in CommentManager.php";
         } 

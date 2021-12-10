@@ -63,11 +63,12 @@ class PostManager extends BaseManager
     public function createPost(Post $post)
     {
         try {
-            $query = $this->db->prepare("INSERT INTO `post` (`id`, `publishedDate`, `title`, `content`, `authorId`) VALUES (NULL, :publishedDate ,:title, :content ,:authorId)");
+            $query = $this->db->prepare("INSERT INTO `post` (`id`, `publishedDate`, `title`, `content`, `authorId`, `image`) VALUES (NULL, :publishedDate ,:title, :content ,:authorId, :imagee)");
             $query ->bindValue(':title' , $post->getTitle(), PDO::PARAM_STR);
             $query ->bindValue(':content' , $post->getContent(), PDO::PARAM_STR);
             $query ->bindValue(':publishedDate',$post->getPublishedDate()->format('Y-m-d'), PDO::PARAM_STR);
             $query ->bindValue(':authorId',$post->getAuthorId(), PDO::PARAM_INT);
+            $query ->bindValue(':imagee' , $post->getImage(), PDO::PARAM_STR);
             $query->execute();
         } catch (\Exception $e) {
             die('Erreur : '.$e->getMessage());
@@ -85,7 +86,8 @@ class PostManager extends BaseManager
             $query = $this->db->prepare("UPDATE `post`  SET `title` = :title,
                                                         `content` = :content,
                                                         `publishedDate` = :publishedDate,
-                                                        `authorId` = :authorId
+                                                        `authorId` = :authorId,
+                                                        `image` = :imagee
                                                     WHERE `id` = :id");
         
             $query->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
@@ -93,6 +95,7 @@ class PostManager extends BaseManager
             $query->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
             $query->bindValue(':authorId', $post->getAuthorId(), PDO::PARAM_INT);
             $query->bindValue(':id', $post->getId(), PDO::PARAM_INT);
+            $query->bindValue(':imagee', $post->getImage(), PDO::PARAM_STR);
             $query->execute();
         } catch (\Exception $e) {
             die('Erreur : '.$e->getMessage());

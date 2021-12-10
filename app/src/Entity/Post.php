@@ -12,6 +12,7 @@ class Post
     private string $title;
     private string $content;
     private int $authorId;
+    private string $image;
 
     function __construct($data){
         $this->hydrate($data);
@@ -105,6 +106,22 @@ class Post
     public function setAuthorId(int $authorId): void
     {
         $this->authorId = $authorId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setImage(string $image): void
+    {
+        $this->image = $image;
     }
 
     /**

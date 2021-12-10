@@ -27,5 +27,14 @@
     <route path="register-function" action="registerFunction" controller="SecurityController"/>
     <route path="logout" action="logout" controller="SecurityController"/>
 
+    <!--Admin  -->
+    <route path="admin" action="admin" controller="AdminController"/>
+    <route path="admin-delete-user" action="deleteUser" controller="AdminController"/>
+
+
+    <!-- User -->
+    <route path="user" action="user" controller="UserController"/>
+    <route path="user-update" action="updateUser" controller="UserController"/>
+
 
 </routes>

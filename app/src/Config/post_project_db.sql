@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : ven. 10 déc. 2021 à 14:15
+-- Généré le : ven. 10 déc. 2021 à 16:25
 -- Version du serveur : 10.6.4-MariaDB-1:10.6.4+maria~focal
 -- Version de PHP : 7.4.25
 
@@ -63,10 +63,8 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `publishedDate`, `title`, `content`, `authorId`, `image`) VALUES
-(9, '2021-12-01', 'Mauvais rêves', 'Mauvaise idée, tout allait bien avant que je décide\r\nD\'aller chercher dans mes pires souvenirs\r\nCe qui vit la nuit disparaît le matin sans faire un bruit\r\nDouleurs s\'en suivent et tout ça s\'enfuit\r\n\r\nMon corps se déchire, j\'en perds la vue et je crie\r\nPour le meilleur et le pire, ils sont réveillés par mes nuits\r\nJ\'ai beau me le dire, cette fois je m\'l\'étais promis\r\nPlus de cauchemars dans ma vie', 1, '../../Assets/Images/baby (1).jpg'),
-(10, '2021-12-08', 'OG', 'J\'roule un gros pilon pour gérer l\'anxiété, sourire au bout des vres-lè, tant que ça tourne\r\nDans les soirées mondaines, elles sont excitées, dans les soirées mondaines, elles sont excitées (eh)\r\nBébé, vodka, c\'est le mood, la potion (eh), tu ferais mieux de revoir les notions (eh)\r\nBébé, vodka, c\'est le mood, la potion (eh), tu ferais mieux de revoir les notions\r\nJ\'lui mets son coup juste après la vaisselle (la vaisselle), elle me parle de son père au Brésil', 2, '../../Assets/Images/baby (1).jpg'),
-(13, '2021-12-09', 'Doudou', 'J\'repense à tout, tout, tout et même sur Snap\', y a la Doudou-dou\r\nPar la vitre, elle m\'fait \"coucou\", c\'est ma gadji, c\'est mon chouchou\r\nC\'est bizarre, j\'repense à tout, tout, tout, même sur Snap\', y a la Doudou-dou\r\nPar la vitre, elle m\'fait \"coucou\", c\'est ma gadji, c\'est mon chouchou', 1, '../../Assets/Images/baby (1).jpg'),
-(23, '2021-12-10', 'sc', 'sccs', 1, '../../Assets/Images/5ad468e6b6e1c3744726e9892e104c09.jpg');
+(26, '2021-12-10', 'Clic clic', 'T\'ÉTAIS MON CHOUCHOU\r\nJE PEUX PAS OUBLIER LE PASSÉ\r\n\r\nT\'ES LA PLUS BELLE DES ÉTOILES\r\nPARMI LES AUTRES JE VOIS QUE TOI\r\nSI TU TE SENS SEULE DIS-MOI\r\nIL RESTE UNE PLACE AUPRÈS DE MOI\r\nLES PROJECTEURS SUR TOI\r\nC\'EST FOU COMMENT TU BRILLES DANS LE NOIR,\r\nT\'ES LA PLUS BELLE MADEMOISELLE\r\nCOMMENT J\'AURAIS FAIT POUR PAS TE VOIR', 1, '../../Assets/Images/8a077b3521534883d6848f13b0fa7869.jpg'),
+(27, '2021-12-10', 'Say It', 'You gon have to do more than just (say it)\r\nYou gon have to do less when you (do it)\r\nTell mama you know I (show it)\r\nAlways want you to (prove it)\r\nYou gon have to do more than just (say it)\r\nYou gon have to do less when you (do it)\r\nTell mama you know I (show it)\r\nSee you gon need to do more than just (prove it)', 2, '../../Assets/Images/298934818e7268cd48600540d842a75a.jpg');
 
 -- --------------------------------------------------------
 
@@ -88,9 +86,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `lastName`, `mail`, `password`, `isAdmin`) VALUES
-(1, 'Angèle', 'Queen', 'angele@gmail.com', 'ange', 0),
-(2, 'Ninho', 'Jefe', 'ni@gmail.com', 'roro', 1),
-(9, 'test', 'test', 'test@gmail.com', 'test', 1);
+(1, 'Angèle', 'Angèle', 'ange@gmail.com', 'ange', 0),
+(2, 'test', 'test', 'test@gmail.com', 'test', 1);
 
 --
 -- Index pour les tables déchargées
@@ -128,13 +125,13 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

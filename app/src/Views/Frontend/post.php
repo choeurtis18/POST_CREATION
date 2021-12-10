@@ -61,6 +61,8 @@
         <div class="comment-card">
             <p>Ecrit par <?= $comment->getCommentAuthor($comment->getAuthorId())->getName(); ?> le <?= $comment->getPublishedDate()->format('Y-m-d'); ?></p>
             <p><?= $comment->getContent(); ?></p>
+            <a href="/edit-comment/<?= $comment->getId();?>"><button class="post-card-button">Edit comment</button><a>
+            <a href="/delete-comment/<?= $comment->getId();?>"><button class="post-card-button">Delete comment</button><a>
             <hr>
         </div>
         <?php

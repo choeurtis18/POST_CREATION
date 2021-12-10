@@ -45,7 +45,7 @@ class PostController extends BaseController
                 'post' => $post,
                 'message' => Null
             ],
-            'Home Page'
+            'Add Comment'
         );
     }
     public function executeAddPost()
@@ -58,7 +58,7 @@ class PostController extends BaseController
             [
                 'message' => Null
             ],
-            'Home Page'
+            'Add Post'
         );
     }
 
@@ -69,7 +69,7 @@ class PostController extends BaseController
         $p = new Post(["publishedDate"=>date("Y-m-d"), "title"=>$_POST['post-title'], "authorId"=>$_POST['author-id'], "content"=>$_POST['post-content']]);
         $post = $postManager->createPost($p);
         
-        header('Location: /');
+        header('Location: /user-post/');
         
     }
 
@@ -95,8 +95,6 @@ class PostController extends BaseController
             ],
             $post->getTitle()
         );
-        
-        
     }
 
 
@@ -116,4 +114,73 @@ class PostController extends BaseController
             $user->getName().' posts'
         );
     }
+
+    public function executeEditPost() {
+        Flash::setFlash('alert', 'je suis une alerte');
+        $postManager = new PostManager(PDOFactory::getMysqlConnection());
+        $post = $postManager->getPostById($this->params["id"]);
+        
+        $this->render(
+            'edit-post.php',
+            [  
+                'post' => $post,
+                'message' => Null
+            ],
+            'Edit Post'
+        );
+    }
+
+    public function executeSubmitEditPost() {
+        Flash::setFlash('alert', 'je suis une alerte');
+        $postManager = new PostManager(PDOFactory::getMysqlConnection());
+        
+        $p = new Post(["title"=>$_POST['post-title'], "content"=>$_POST['post-content'], "publishedDate"=>date("Y-m-d"), "authorId"=>$_POST['author-id'], "id"=>$_POST['post-id']]);
+        $post = $postManager->updatePost($p);
+        
+        header('Location: /user-post/');
+    }
+
+    public function executeEditComment() {
+        Flash::setFlash('alert', 'je suis une alerte');
+        $commentManager = new CommentManager(PDOFactory::getMysqlConnection());
+        $comment = $commentManager->getCommentById($this->params["id"]);
+        
+        $this->render(
+            'edit-comment.php',
+            [
+                'comment' => $comment,
+                'message' => Null
+            ],
+            'Edit Comment'
+        );
+
+    }
+
+    public function executeSubmitEditComment() {
+        Flash::setFlash('alert', 'je suis une alerte');
+        $commentManager = new CommentManager(PDOFactory::getMysqlConnection());
+
+        $c = new Comment(["content"=>$_POST['comment-content'], "publishedDate"=>date("Y-m-d"), "authorId"=>$_POST['author-id'],  "id"=>$_POST['comment-id']]);
+        $comment = $commentManager->updateComment($c);
+        
+        header('Location: /');
+    }
+
+    public function executeDeletePost() {
+        Flash::setFlash('alert', 'je suis une alerte');
+        $postManager = new PostManager(PDOFactory::getMysqlConnection());
+        $post = $postManager->deletePostById($this->params['id']);
+
+        header('Location: /user-post/');
+    }
+
+    public function executeDeleteComment() {
+        Flash::setFlash('alert', 'je suis une alerte');
+        $commentManager = new CommentManager(PDOFactory::getMysqlConnection());
+        $comment = $commentManager->deleteCommentById($this->params['id']);
+
+        header('Location: /');
+    }
+
+
 }

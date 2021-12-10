@@ -91,12 +91,12 @@ class UserManager extends BaseManager
   {
     try {
       $query = $this->db->prepare('SELECT * FROM `user` WHERE `name` = :namee AND lastName = :lastName AND mail = :mail AND `password` = :passwordd');
-      $query->bindValue(':namee', $user->getName(), \PDO::PARAM_INT);
-      $query->bindValue(':lastName', $user->getLastName(), \PDO::PARAM_INT);
-      $query->bindValue(':mail', $user->getMail(), \PDO::PARAM_INT);
-      $query->bindValue(':passwordd', $user->getPassword(), \PDO::PARAM_INT);
-
+      $query->bindValue(':namee' , $user->getName(), PDO::PARAM_STR);
+      $query->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);
+      $query->bindValue(':mail', $user->getMail(), PDO::PARAM_STR);
+      $query->bindValue(':passwordd', $user->getPassword(), PDO::PARAM_STR);
       $query->execute();
+
       $row = $query->fetch(\PDO::FETCH_ASSOC);
       if($row['isAdmin'] == 1){
         $user = new Admin($row);
@@ -120,6 +120,7 @@ class UserManager extends BaseManager
   {
     try {
       $query = $this->db->prepare("INSERT INTO `user` (`id`, `name`, `lastName`, `mail`, `password`, `isAdmin`) VALUES (NULL, :namee, :lastName, :mail, :passwrd, :isAdmin)");
+
       if(!$this->checkEmail($user->getMail())) {
         $query->bindValue(':namee' , $user->getName(), PDO::PARAM_STR);
         $query->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);

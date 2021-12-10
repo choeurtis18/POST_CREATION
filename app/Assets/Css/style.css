@@ -1,0 +1,417 @@
+.navbar {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.navbar-option {
+    text-decoration: none;
+    padding: 1rem 2rem 1.15rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #ebebeb;
+    min-width: 80px;
+    margin: auto;
+}
+.navbar-option:hover {
+    background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
+    background-size: 100% 100%;
+    color: #27262c;
+    animation: spring 300ms ease-out;
+    text-shadow: 0 -1px 0 #ef816c;
+    font-weight: bold;
+}
+
+.addComment-container h1 {
+    margin: 50px 0px 80px 20px;
+}
+
+.addComment-container .card {
+    width: 100%;
+    margin: 0 0 50px 0;
+}
+
+.addPost-container h1 {
+    margin: 50px 0px 80px 0px;
+}
+
+.addPost-container .card {
+    width: 100%;
+    margin: 0 0 50px 0;
+}
+
+.home-container h1 {
+    margin: 50px 0px 80px 20px;
+    text-align: center;
+}
+
+.card__container {
+    width: 100%;
+}
+
+.blog-card {
+    background-color: white;
+    border-radius: 1px;
+    box-shadow: 0 0 2px -1px rgba(0, 0, 0, 0.75);
+    margin: 0 auto;
+    height: 85vh;
+    margin-bottom: 20px;
+    max-width: 1200px;
+    overflow: hidden;
+}
+
+
+.media {
+    float: left;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+.card-body {
+    float: right;
+    color: #000;
+    height: 100%;
+    padding: 30px 20px 50px;
+}
+
+.tagline {
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.title {
+    color: #000;
+    font-family: "Playfair Display SC";
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.divider {
+    background: #000;
+    height: 2px;
+    margin: 10px auto;
+    width: 40px;
+}
+
+.paragraph {
+    font-weight: 300;
+}
+.link {
+    color: #000!important;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+.link:hover {
+    color: #337ab7!important;
+    text-decoration: none;
+}
+@media (max-width: 700px) {
+    .media {
+        display: none;
+    }
+    .col-xs-6 {
+        width: 100%;
+    }
+}
+
+.card__container {
+    width: 100%;
+}
+
+.blog-card {
+    background-color: white;
+    border-radius: 1px;
+    box-shadow: 0 0 2px -1px rgba(0, 0, 0, 0.75);
+    margin: 0 auto;
+    height: 85vh;
+    margin-bottom: 20px;
+    max-width: 1200px;
+    overflow: hidden;
+}
+
+
+
+.media {
+    float: left;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+.card-body {
+    float: right;
+    color: #000;
+    height: 100%;
+    padding: 30px 20px 50px;
+}
+
+.tagline {
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.title {
+    color: #000;
+    font-family: "Playfair Display SC";
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.divider {
+    background: #000;
+    height: 2px;
+    margin: 10px auto;
+    width: 40px;
+}
+
+.paragraph {
+    font-weight: 300;
+}
+.link {
+    color: #000!important;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+.link:hover {
+    color: #337ab7!important;
+    text-decoration: none;
+}
+@media (max-width: 700px) {
+    .media {
+        display: none;
+    }
+    .col-xs-6 {
+        width: 100%;
+    }
+}
+
+.comment-title-id, .addComment-title-id{
+    width: 100%;
+    margin: 0 0px 20px 0px;
+    font-weight: bold;
+}
+
+
+
+.form-structor {
+    background-color: #222;
+    border-radius: 15px;
+    height: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    width: 691px;
+    position: relative;
+    overflow: hidden;
+}
+.form-structor::after {
+    content: '';
+    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+}
+.form-structor .signup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    width: 65%;
+    z-index: 5;
+    -webkit-transition: all 0.3s ease;
+}
+
+
+.form-structor .signup .form-title {
+    color: #fff;
+    font-size: 1.7em;
+    text-align: center;
+}
+
+.form-structor .signup .form-holder {
+    border-radius: 15px;
+    background-color: #fff;
+    overflow: hidden;
+    margin-top: 50px;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .signup .form-holder .input {
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    padding: 8px 15px;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    font-size: 12px;
+}
+
+
+.form-structor .signup .submit-btn {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: rgba(255, 255, 255, 0.7);
+    border: 0;
+    border-radius: 15px;
+    display: block;
+    margin: 15px auto;
+    padding: 15px 45px;
+    width: 100%;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .signup .submit-btn:hover {
+    transition: all 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.form-structor .login {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 5;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -20px;
+    -webkit-transform: translate(-50%, 0);
+    background-color: #fff;
+    width: 200%;
+    height: 250px;
+    border-radius: 50%;
+    z-index: 4;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login .center {
+    position: absolute;
+    top: calc(50% - 10%);
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    width: 65%;
+    z-index: 5;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login .center .form-title {
+    color: #000;
+    font-size: 1.7em;
+    text-align: center;
+}
+.form-structor .login .center .form-title span {
+    color: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login .center .form-holder {
+    border-radius: 15px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    overflow: hidden;
+    margin-top: 50px;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login .center .form-holder .input {
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    padding: 8px 15px;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    font-size: 12px;
+}
+.form-structor .login .center .form-holder .input:last-child {
+    border-bottom: 0;
+}
+.form-structor .login .center .form-holder .input::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+.form-structor .login .center .submit-btn {
+    background-color: #6B92A4;
+    color: rgba(255, 255, 255, 0.7);
+    border: 0;
+    border-radius: 15px;
+    display: block;
+    margin: 15px auto;
+    padding: 15px 45px;
+    width: 100%;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login .center .submit-btn:hover {
+    transition: all 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.form-structor .login.slide-up {
+    top: 90%;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login.slide-up .center {
+    top: 10%;
+    -webkit-transform: translate(-50%, 0%);
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login.slide-up .form-holder, .form-structor .login.slide-up .submit-btn {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login.slide-up .form-title {
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+}
+.form-structor .login.slide-up .form-title span {
+    margin-right: 5px;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: all 0.3s ease;
+
+}
+
+
+@media (min-width: 1400px){}
+.container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 100% !important;
+}
+
+@media (max-width: 700px) {
+    .media {
+        display: none;
+    }
+    .col-xs-6 {
+        width: 100%;
+    }
+}
+

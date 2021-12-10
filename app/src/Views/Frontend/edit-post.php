@@ -1,15 +1,3 @@
-<style>
-.addPost-container h1 {
-    margin: 50px 0px 80px 0px;
-}
-
-.addPost-container .card {
-    width: 100%;
-    margin: 0 0 50px 0;
-}
-
-</style>
-
 <div class="addPost-container">
     <h1>Modifier le Post</h1>
 

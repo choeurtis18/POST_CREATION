@@ -1,7 +1,7 @@
 <div class="form-structor">
     <p style="color: #FF0000;"><?=  htmlspecialchars($_GET["error_message"]) ?></p>
     <form method="post" action="/register-function/" class="signup">
-        <h2 class="form-title" id="signup">S'inscrire</h2>
+        <h2 class="form-title" id="signup">Inscription</h2>
         <div class="form-holder">
             <input type="text" class="input"  name="lastname" placeholder="Nom" required />
             <input type="text" class="input"  name="firstname" placeholder="Prénom" required/>

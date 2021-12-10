@@ -52,7 +52,8 @@
                 <p><?php echo $post->getContent(); ?>.</p><br>
             </div>
             <a href="/post/<?= $post->getId();?>"><button class="post-card-button">+ Read now</button><a>
-            <a href="#"><button class="post-card-button">+ Edit post</button><a>
+            <a href="/edit-post/<?= $post->getId();?>"><button class="post-card-button">+ Edit post</button><a>
+            <a href="/delete-post/<?= $post->getId();?>"><button class="post-card-button">+ Delete post</button><a>
         </div>
         
         <?php

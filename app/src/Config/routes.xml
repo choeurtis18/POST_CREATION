@@ -11,7 +11,15 @@
     <route path="add-post" action="addPost" controller="PostController"/>
     <route path="submit-add-post" action="submitPost" controller="PostController"/>
     <route path="submit-add-comment" action="submitComment" controller="PostController"/>
-    
+
+    <route path="edit-post" action="editPost" controller="PostController" params="id"/>
+    <route path="edit-comment" action="editComment" controller="PostController" params="id"/>
+    <route path="submit-edit-post" action="submitEditPost" controller="PostController"/>
+    <route path="submit-edit-comment" action="submitEditComment" controller="PostController"/>
+
+    <route path="delete-post" action="deletePost" controller="PostController" params="id"/>
+    <route path="delete-comment" action="deleteComment" controller="PostController" params="id"/>
+
     <!--Security-->
     <route path="login" action="login" controller="SecurityController"/>
     <route path="login-function" action="loginFunction" controller="SecurityController"/>

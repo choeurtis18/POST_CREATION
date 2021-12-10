@@ -94,18 +94,17 @@ class CommentManager extends BaseManager
         try {
             $query = $this->db->prepare("UPDATE `Comment`  SET `content` = :content,
                                                         `publishedDate` = :publishedDate,
-                                                        `authorId` = :authorId, `postId` = :postId
+                                                        `authorId` = :authorId
                                                     WHERE `id` = :id");
         
             $query->bindValue(':publishedDate', $comment->getPublishedDate()->format('Y-m-d'), \PDO::PARAM_STR);
             $query->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
             $query->bindValue(':authorId', $comment->getAuthorId(), \PDO::PARAM_INT);
-            $query ->bindValue(':postId',$comment->getPostId(), \PDO::PARAM_INT);
             $query->bindValue(':id', $comment->getId(), \PDO::PARAM_INT);
             $query->execute();
         } catch (\Exception $e) {
             die('Erreur : '.$e->getMessage());
-            return "error deleteCommentById function in CommentManager.php";
+            return "error updateComment function in CommentManager.php";
         }
     }
 

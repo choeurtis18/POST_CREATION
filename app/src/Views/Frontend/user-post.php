@@ -104,6 +104,9 @@
                 <div class="divider"></div>
                 <p class="paragraph text-justify"><?php echo $post->getContent(); ?></p>
             </div>
+            <a href="/post/<?= $post->getId();?>"><button class="post-card-button">+ Read now</button><a>
+            <a href="/edit-post/<?= $post->getId();?>"><button class="post-card-button">+ Edit post</button><a>
+            <a href="/delete-post/<?= $post->getId();?>"><button class="post-card-button">+ Delete post</button><a>
         </div>
         
         <?php

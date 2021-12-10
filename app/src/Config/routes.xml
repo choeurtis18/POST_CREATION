@@ -11,13 +11,30 @@
     <route path="add-post" action="addPost" controller="PostController"/>
     <route path="submit-add-post" action="submitPost" controller="PostController"/>
     <route path="submit-add-comment" action="submitComment" controller="PostController"/>
-    
+
+    <route path="edit-post" action="editPost" controller="PostController" params="id"/>
+    <route path="edit-comment" action="editComment" controller="PostController" params="id"/>
+    <route path="submit-edit-post" action="submitEditPost" controller="PostController"/>
+    <route path="submit-edit-comment" action="submitEditComment" controller="PostController"/>
+
+    <route path="delete-post" action="deletePost" controller="PostController" params="id"/>
+    <route path="delete-comment" action="deleteComment" controller="PostController" params="id"/>
+
     <!--Security-->
     <route path="login" action="login" controller="SecurityController"/>
     <route path="login-function" action="loginFunction" controller="SecurityController"/>
     <route path="register" action="register" controller="SecurityController"/>
     <route path="register-function" action="registerFunction" controller="SecurityController"/>
     <route path="logout" action="logout" controller="SecurityController"/>
+
+    <!--Admin  -->
+    <route path="admin" action="admin" controller="AdminController"/>
+    <route path="admin-delete-user" action="deleteUser" controller="AdminController"/>
+
+
+    <!-- User -->
+    <route path="user" action="user" controller="UserController"/>
+    <route path="user-update" action="updateUser" controller="UserController"/>
 
 
 </routes>

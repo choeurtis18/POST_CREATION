@@ -47,12 +47,19 @@
     <nav class="navbar" style="margin: 0 20px 20px 20px;">
         <a class="navbar-option" href="/">Accueil</a>
         <?php if($_SESSION['user_id'] == NULL) { ?>
-        <a class="navbar-option" href="/login/">Connexion</a>
-        <a class="navbar-option" href="/register/">Inscription</a>
+             <a class="navbar-option" href="/login/">Connexion</a>
+             <a class="navbar-option" href="/register/">Inscription</a>
         <?php }else { ?>
-        <a class="navbar-option" href="/add-post/">Créer un Post</a>
-        <a class="navbar-option" href="/user-post/">My post</a>
-        <a class="navbar-option" href="/logout/">Logout</a>
+                <a class="navbar-option" href="/add-post/">Créer un Post</a>
+                <a class="navbar-option" href="/user-post/">Mes posts</a>
+                <a class="navbar-option" href="/user">Mon compte</a>
+            <?php  if(!empty($_SESSION['admin'])) { ?>
+                <a class="navbar-option" href="/admin">Gérer les utilisateurs</a>
+            <?php } ?>
+
+            <a class="navbar-option" href="/logout/">Logout</a>
+
+
         <?php } ?>
     </nav>
 

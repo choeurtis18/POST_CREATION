@@ -9,14 +9,24 @@ use App\Entity\Comment;
 use App\Entity\User;
 use PDO;
 
+/**
+ *
+ */
 class UserManager extends BaseManager
 {
   private $bdd;
 
+  /**
+   * @param PDO $db
+   */
   public function __construct(\PDO $db){
     $this->setDb($db);
   }
 
+  /**
+   * @param $db
+   * @return $this
+   */
   public function setDb($db){
     $this->db = $db;
     return $this;
@@ -219,7 +229,12 @@ class UserManager extends BaseManager
     
   }
 
-  public function login($mail,$password)
+  /**
+   * @param $mail
+   * @param $password
+   * @return Admin|Standard|void
+   */
+  public function login($mail, $password)
   {
     try {
       $query = $this->db->prepare('SELECT * FROM user WHERE mail=:mail and password=:password' );
@@ -238,6 +253,21 @@ class UserManager extends BaseManager
 
 
     } catch (\Exception $e) {
+      die('Erreur : '.$e->getMessage());
+      return "PASBON";
+    }
+  }
+
+
+  /**
+   * @param $id
+   */
+  public function deleteUser($id){
+    try{
+      $query=$this->db->prepare('DELETE FROM user WHERE id=:id');
+      $query->bindValue(':id',$id);
+      $query->execute();
+    }catch (\Exception $e) {
       die('Erreur : '.$e->getMessage());
       return "PASBON";
     }

@@ -21,7 +21,7 @@
             <th scope="row"><?php echo $user->getName(); ?></th>
             <td><?php echo $user->getLastName(); ?></td>
             <td><?php echo $user->getMail(); ?></td>
-            <td> <input type="checkbox" id="horns" name="horns"
+            <td> <input disabled type="checkbox" id="horns" name="horns"
                     <?php if( $user->getIsAdmin()==true){  ?>
                         checked
                 <?php }  ?> </td>

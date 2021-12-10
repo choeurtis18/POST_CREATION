@@ -38,8 +38,12 @@ class SecurityController extends BaseController{
 
     public function createUserSession($user) {
         $_SESSION['user_id'] = $user->getId();
-        $_SESSION['username'] = $user->getName();
+        $_SESSION['lastname'] = $user->getLastName();
+        $_SESSION['firstname'] = $user->getName();
         $_SESSION['email'] = $user->getMail();
+        $_SESSION['password'] = $user->getPassword();
+        $_SESSION['admin'] = $user->getIsAdmin();
+
     }
 
 
@@ -80,8 +84,12 @@ class SecurityController extends BaseController{
 
     public function exitUserSession() {
         $_SESSION['user_id'] = Null;
-        $_SESSION['username'] = Null;
+        $_SESSION['firstname'] = Null;
+        $_SESSION['lastname'] = Null;
         $_SESSION['email'] = Null;
+        $_SESSION['password'] = Null;
+        $_SESSION['admin'] = Null;
+
         header('Location: /');
     }
 }

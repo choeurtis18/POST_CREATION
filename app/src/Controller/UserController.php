@@ -36,28 +36,28 @@ class UserController extends BaseController
     {
         $userManager = new UserManager(PDOFactory::getMysqlConnection());
         $user=$userManager->deleteUser($_POST['id']);
-        $user->execute();
-
     }
 
     public function executeUpdateUser(){
 
         $userManager = new UserManager(PDOFactory::getMysqlConnection());
-        $test="pessi93@gmail.com";
         $user=new User([
             "id" => $_POST['id'],
             "name" => $_POST['firstname'],
             "lastName" => $_POST['lastname'],
-            "mail" => $test,
+            "mail" => $_POST['email'],
             "password" => $_POST['password'],
-            "isAdmin" => (bool)$_POST['isAdmin'],
+            "isAdmin" => (bool)isset($_POST['isAdmin']),
         ]);
         $_SESSION['firstname']=$user->getName();
         $user=$userManager->updateUser($user);
+        if((bool)isset($_POST['isAdmin']) == true){
+            $_SESSION['admin'] = 1;
+        }else {
+            $_SESSION['admin'] = Null;
+        }
 
         header('Location: /user');
     }
-
-
 
 }

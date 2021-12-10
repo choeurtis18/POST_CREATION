@@ -43,7 +43,6 @@ class SecurityController extends BaseController{
         $_SESSION['email'] = $user->getMail();
         $_SESSION['password'] = $user->getPassword();
         $_SESSION['admin'] = $user->getIsAdmin();
-
     }
 
 

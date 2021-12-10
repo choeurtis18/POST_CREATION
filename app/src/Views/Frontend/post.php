@@ -91,6 +91,10 @@
                     ecrit par : <?= $post->getPostAuthor($post->getAuthorId())->getName() ?> 
                     le <?= $post->getPublishedDate()->format('Y-m-d'); ?>
                 </p>
+                <?php if($_SESSION['user_id'] == $post->getAuthorId() || $_SESSION['admin'] != NULL) {; ?>
+                <a class="link" href="/edit-post/<?= $post->getId();?>">+ Edit post<a> |
+                <a class="link" href="/delete-post/<?= $post->getId();?>">+ Delete post<a>
+                <?php } ?>
                 <h3 class="title text-center"><?php echo $post->getTitle(); ?></h3>
                 <div class="divider"></div>
                 <p class="paragraph text-justify"><?php echo $post->getContent(); ?></p>
@@ -122,8 +126,10 @@
         <div class="comment-card">
             <p>Ecrit par <?= $comment->getCommentAuthor($comment->getAuthorId())->getName(); ?> le <?= $comment->getPublishedDate()->format('Y-m-d'); ?></p>
             <p><?= $comment->getContent(); ?></p>
+            <?php if($_SESSION['user_id'] == $comment->getAuthorId() || $_SESSION['admin'] != NULL) {; ?>
             <a href="/edit-comment/<?= $comment->getId();?>"><button class="post-card-button">Edit comment</button><a>
             <a href="/delete-comment/<?= $comment->getId();?>"><button class="post-card-button">Delete comment</button><a>
+            <?php } ?>
             <hr>
         </div>
         <?php

@@ -14,7 +14,7 @@
     <h1>Edit Post</h1>
 
     <div class="card">
-        <form action="/submit-edit-post/" method="POST">
+        <form action="/submit-edit-post/" method="POST" enctype="multipart/form-data">
             <input type="text" id="author-id" name="author-id" value="<?= $_SESSION['user_id'] ?>" hidden>
             <input type="text" id="post-id" name="post-id" value="<?= $post->getId() ?>" hidden>
 
@@ -27,6 +27,7 @@
             <label for="post-content">Content:</label><br>
             <textarea rows="5" cols="50" name="post-content" id="post-content"><?= $post->getContent() ?></textarea><br><br>
             
+            <input type="file" name="post-image"><br><br>
             <input type="submit" value="Submit">
         </form> 
     </div>

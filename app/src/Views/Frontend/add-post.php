@@ -14,14 +14,14 @@
     <h1>Add Post</h1>
 
     <div class="card">
-        <form action="/submit-add-post/" method="POST">
+        <form action="/submit-add-post/" method="POST" enctype="multipart/form-data">
             <input type="text" id="author-id" name="author-id" value="<?= $_SESSION['user_id'] ?>" hidden>
-
+            <p style="color: #FF0000;"><?=  htmlspecialchars($_GET["error_message"]) ?></p>
             <input type="text" class="input" name="post-title" placeholder="Title" /><br>
             <label for="post-content">Content:</label><br>
-            <textarea rows="5" cols="50" name="post-content" id="post-content"></textarea><br><br>
-            
-            <input type="submit" value="Submit">
+            <textarea rows="5" cols="50" name="post-content" id="post-content"></textarea><br>
+            <input type="file" name="post-image"><br><br>
+            <input type="submit" value="submit" value="Submit">
         </form> 
     </div>
 </div>

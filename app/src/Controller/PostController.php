@@ -65,11 +65,37 @@ class PostController extends BaseController
     public function executeSubmitPost() 
     {
         Flash::setFlash('alert', 'je suis une alerte');
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $p = new Post(["publishedDate"=>date("Y-m-d"), "title"=>$_POST['post-title'], "authorId"=>$_POST['author-id'], "content"=>$_POST['post-content']]);
-        $post = $postManager->createPost($p);
-        
-        header('Location: /user-post/');
+        $maxSize = 150000;
+        $validExt = array(".jpg", ".png", ".jpeg", ".gif");
+
+        if($_FILES["post-image"]["error"] > 0) {
+            header('Location: /add-post?error_message=erreur lors du transfert de l\'image');
+        }
+
+        $file_size = $_FILES["post-image"]["size"];
+        if ($file_size > $maxSize) {
+            header('Location: /add-post?error_message=fichier trop lourd');
+        }
+
+        $file_name = $_FILES["post-image"]["name"];
+        $file_ext = "." . strtolower(substr(strrchr($_FILES["post-image"]["name"], "."), 1));
+        if (!in_array($file_ext, $validExt)) {
+            header('Location: /add-post?error_message=le fichier n\'est pas une image');
+        }
+
+        $tmp_name = $_FILES["post-image"]["tmp_name"];
+        $unique_name = md5(uniqid(rand(), true));
+        $file_name = dirname(__DIR__, 2) . "/Assets/Images/" . $unique_name . $file_ext;
+        $result = move_uploaded_file($tmp_name, $file_name);
+
+        if($result) {
+            $postManager = new PostManager(PDOFactory::getMysqlConnection());
+            $p = new Post(["publishedDate"=>date("Y-m-d"), "title"=>$_POST['post-title'], "authorId"=>$_POST['author-id'], "content"=>$_POST['post-content'], "image"=>"../../Assets/Images/" . $unique_name . $file_ext]);
+            $postManager->createPost($p);
+            header('Location: /');
+        }else {
+            header('Location: /add-post?error_message=Erreur lors de la sauvegarde du fichier');
+        }
         
     }
 

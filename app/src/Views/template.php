@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <base href="/"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!--Lien Boostrap + page css-->
     <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../Assets/Css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/Css/style.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -17,9 +18,6 @@
     <title><?= $title; ?></title>
 </head>
 <body style="margin: 50px 100px 50px 100px">
-    <style>
-
-    </style>
     <nav class="navbar" style="margin: 0 20px 20px 20px;">
         <a class="navbar-option" href="/">Accueil</a>
         <?php if($_SESSION['user_id'] == NULL) { ?>

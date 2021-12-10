@@ -59,7 +59,7 @@ class SecurityController extends BaseController{
         $userManager = new UserManager(PDOFactory::getMysqlConnection());
 
         $user=new User([
-            "firstname" => $_POST['firstname'],
+            "name" => $_POST['name'],
             "lastName" => $_POST['lastname'],
             "mail" => $_POST['mail'],
             "password" => $_POST['password'],

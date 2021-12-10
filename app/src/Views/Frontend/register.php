@@ -4,7 +4,7 @@
         <h2 class="form-title" id="signup">Inscription</h2>
         <div class="form-holder">
             <input type="text" class="input"  name="lastname" placeholder="Nom" required />
-            <input type="text" class="input"  name="firstname" placeholder="Prénom" required/>
+            <input type="text" class="input"  name="name" placeholder="Prénom" required/>
             <input type="email" class="input" name="mail" placeholder="mail" required />
             <input type="password" class="input" name="password" placeholder="password" required />
             <input type="checkbox" class="checkbox" name="isAdmin" placeholder="isAdmin"> Est Admin

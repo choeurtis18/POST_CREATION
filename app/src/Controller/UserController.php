@@ -46,13 +46,13 @@ class UserController extends BaseController
         $test="pessi93@gmail.com";
         $user=new User([
             "id" => $_POST['id'],
-            "name" => $_POST['lastname'],
-            "lastName" => $_POST['firstname'],
+            "name" => $_POST['firstname'],
+            "lastName" => $_POST['lastname'],
             "mail" => $test,
             "password" => $_POST['password'],
             "isAdmin" => (bool)$_POST['isAdmin'],
         ]);
-        $_SESSION['firstname']=$user->getname();
+        $_SESSION['firstname']=$user->getName();
         $user=$userManager->updateUser($user);
 
         header('Location: /user');

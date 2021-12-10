@@ -99,21 +99,21 @@
         <?php if($_SESSION['user_id'] != NULL) { ?>
         <div class="addComment-card">
             <div class="addComment-card-container">
-                <h3 id="addComment-title-id">Comments</h3>
+                <h3 id="addComment-title-id">Commentaires</h3>
                 <form class="addComment-card-content" action="/submit-add-comment/" method="POST">
                     <input type="text" name="post-id" value="<?= $post->getId() ?>" hidden>
                     <input type="text" id="author-id" name="author-id" value="<?= $_SESSION['user_id'] ?>" hidden>
                     
-                    <label for="author-id">Author:</label><br>
-                    <input type="text" id="author-name" name="author-name" value="<?= $_SESSION['username'] ?>" disabled="disabled"><br>
-                    <label for="comment-content">Content:</label><br>
+                    <label for="author-id">Auteur:</label><br>
+                    <input type="text" id="author-name" name="author-name" value="<?= $_SESSION['firstname'] ?>" disabled="disabled"><br>
+                    <label for="comment-content">Contenu:</label><br>
                     <textarea id="comment-content" rows="5" cols="50" name="comment-content" value="Doe"></textarea><br><br>
                     <input type="submit" value="Submit"><br><br><br><br>
                 </form>
             </div>
         </div>
         <?php } ?>
-        <h3 id="comment-title-id">Comments</h3>
+        <h3 id="comment-title-id">Commentaires</h3>
         <hr>
         <?php
         if($comments != NULL){
@@ -122,15 +122,15 @@
         <div class="comment-card">
             <p>Ecrit par <?= $comment->getCommentAuthor($comment->getAuthorId())->getName(); ?> le <?= $comment->getPublishedDate()->format('Y-m-d'); ?></p>
             <p><?= $comment->getContent(); ?></p>
-            <a href="/edit-comment/<?= $comment->getId();?>"><button class="post-card-button">Edit comment</button><a>
-            <a href="/delete-comment/<?= $comment->getId();?>"><button class="post-card-button">Delete comment</button><a>
+            <a href="/edit-comment/<?= $comment->getId();?>"><button class="post-card-button">Modifier</button><a>
+            <a href="/delete-comment/<?= $comment->getId();?>"><button class="post-card-button">Supprimer</button><a>
             <hr>
         </div>
         <?php
         }
         }else {
         ?>
-            <p>No comment Found</p>
+            <p>Aucun Commentaire pour ce Post</p>
         <?php
         }
         ?>

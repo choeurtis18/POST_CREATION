@@ -99,4 +99,21 @@ class PostController extends BaseController
         
     }
 
+
+    public function executeShowUserPost()
+    {
+        Flash::setFlash('alert', 'je suis une alerte');
+        $postManager = new UserManager(PDOFactory::getMysqlConnection());
+        $posts = $postManager->getUserPosts($_SESSION["user_id"]);
+        $user = $postManager->getUserById($_SESSION["user_id"]);
+
+
+        $this->render(
+            'user-post.php',
+            [
+                'posts' => $posts
+            ],
+            $user->getName().' posts'
+        );
+    }
 }

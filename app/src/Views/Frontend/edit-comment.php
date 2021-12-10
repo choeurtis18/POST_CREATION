@@ -1,15 +1,3 @@
-<style>
-.addComment-container h1 {
-    margin: 50px 0px 80px 20px;
-}
-
-.addComment-container .card {
-    width: 100%;
-    margin: 0 0 50px 0;
-}
-
-</style>
-
 <div class="addComment-container">
     <h1>Edit Comment</h1>
 

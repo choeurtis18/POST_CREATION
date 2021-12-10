@@ -9,7 +9,7 @@
                 <input type="text" class="input" name="lastname" value="<?php echo $_SESSION['lastname']; ?>" placeholder="LastName" />
                 <input type="email" class="input" name="email" value="<?php echo $_SESSION['email']; ?>" placeholder="Email" />
                 <input type="password" class="input"name="password" value="<?php echo $_SESSION['password']; ?>" placeholder="Password" />
-                <input type="checkbox" class="checkbox" name="isAdmin" value="<?php echo $_SESSION['admin']; ?>" placeholder="Password" />
+                <input type="checkbox" class="checkbox" name="isAdmin" value="<?php echo $_SESSION['admin']; ?>" /><label>isAdmin</label>
 
             </div>
             <button class="submit-btn btn-warning">Mettre à jour</button>

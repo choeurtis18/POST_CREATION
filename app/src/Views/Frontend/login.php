@@ -1,4 +1,3 @@
-
 <div class="form-structor">
     <p style="color: #FF0000;"><?=  htmlspecialchars($_GET["error_message"]) ?></p>
     <form class="signup" method="post" action="/login-function/">
